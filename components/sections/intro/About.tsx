@@ -19,7 +19,7 @@ const About = () => {
             the 10kb webs initiative.
           </h2>
         </hgroup>
-        <Link href="/" className="block text-surface mt-2 w-fit">
+        <Link scroll={false} href="/" className="block text-surface mt-2 w-fit">
           Go back{' ->'}
         </Link>
         <div className="text-sm text-muted leading-relaxed mt-8 space-y-2">

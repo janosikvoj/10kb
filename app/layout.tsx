@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Fira_Code } from 'next/font/google';
+import Header from '@/components/navigation/Header';
+import Footer from '@/components/navigation/Footer';
 
 export const metadata: Metadata = {
   title: '10kb webs',
@@ -23,7 +25,12 @@ export default function RootLayout({
       lang="en"
       className={`${firaCode.variable} antialiased overflow-x-hidden bg-background text-text`}
     >
-      <body className="relative">{children}</body>
+      <body className="relative">
+        <div id="top" className="h-0 hidden" />
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

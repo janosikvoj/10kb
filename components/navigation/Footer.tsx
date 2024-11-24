@@ -4,7 +4,8 @@ import ResponsiveContainer from '../common/ResponsiveContainer';
 
 const Footer = () => {
   return (
-    <footer className="mt-48 pt-8 sm:pt-24 pb-24 bg-footer">
+    <footer className="relative z-20 mt-48 pt-8 sm:pt-24 pb-24 bg-footer">
+      <div className="absolute bg-gradient-to-t from-background h-48 -mt-48 w-full top-0 pointer-events-none" />
       <ResponsiveContainer>
         <hgroup className="flex flex-row items-center gap-4 mb-32">
           <Image

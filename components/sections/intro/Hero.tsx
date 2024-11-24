@@ -18,10 +18,14 @@ const Hero = () => {
             <h1 className="leading-tight">
               Collection of lightweight sites,{' '}
               <br className="hidden md:block" />
-              created by the students of Digital design at TBU.
+              created by the students of Digital design.
             </h1>
           </hgroup>
-          <Link href="/?nav=about" className="block text-surface mt-2 w-fit">
+          <Link
+            scroll={false}
+            href="/?nav=about"
+            className="block text-surface mt-2 w-fit"
+          >
             {'<- '}Read more
           </Link>
         </ResponsiveContainer>

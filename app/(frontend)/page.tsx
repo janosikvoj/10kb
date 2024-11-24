@@ -1,12 +1,15 @@
+import LandingPageNav from '@/components/navigation/LandingPageNav';
+import Hero from '@/components/sections/intro/Hero';
 import ProjectsLibrary from '@/components/sections/projects-library/ProjectsLibrary';
-import Intro from '@/components/sections/intro/Intro';
 
-export default function Page() {
+export default function LandingPage() {
   return (
-    <div className="w-full">
-      <Intro />
-      <div className="h-64" />
-      <ProjectsLibrary />
-    </div>
+    <LandingPageNav>
+      <div className="w-full">
+        <Hero />
+        <div className="h-64" />
+        <ProjectsLibrary />
+      </div>
+    </LandingPageNav>
   );
 }

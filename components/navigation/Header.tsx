@@ -15,7 +15,7 @@ const Header = () => {
           </Link>
           <ul className="flex flex-row gap-8">
             <li>
-              <Link href="/?nav=about">
+              <Link scroll={false} href="/?nav=about">
                 <Action>About</Action>
               </Link>
             </li>
@@ -24,19 +24,26 @@ const Header = () => {
                 <Action>Projects</Action>
               </Link>
             </li>
+            <li>
+              <Link href="/admin" className="px-1.5 py-0.5">
+                <Action>Admin</Action>
+              </Link>
+            </li>
           </ul>
-          <section
-            role="search"
-            className="justify-self-end hidden sm:flex flex-row gap-2 items-center text-muted"
-          >
-            <Image
-              src="/assets/icon_zoom.svg"
-              alt="Zoom icon"
-              width={24}
-              height={24}
-            />
-            Search
-          </section>
+          <Link scroll={false} href="/?nav=search">
+            <section
+              role="search"
+              className="justify-self-end hidden sm:flex flex-row gap-2 items-center text-muted"
+            >
+              <Image
+                src="/assets/icon_zoom.svg"
+                alt="Zoom icon"
+                width={24}
+                height={24}
+              />
+              Search
+            </section>
+          </Link>
         </nav>
       </ResponsiveContainer>
       <section role="search" className="sm:hidden bg-footer">

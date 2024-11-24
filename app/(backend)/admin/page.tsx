@@ -9,11 +9,12 @@ export default async function Admin() {
   return (
     <>
       <Toaster />
-      <div className="flex justify-center mt-8">
-        <ResponsiveContainer className="max-w-96">
+
+      <ResponsiveContainer className="flex justify-center pt-64">
+        <ResponsiveContainer className="max-w-lg">
           <AddProjectForm data={{ authors: authors }} />
         </ResponsiveContainer>
-      </div>
+      </ResponsiveContainer>
     </>
   );
 }
