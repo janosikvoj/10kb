@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating krásy</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif; 
+            color: #ffffff; 
+            background-color: #151515; 
+        }
+
+        #webcamContainer {
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden; 
+            border-radius: 15px; 
+            z-index: 1; 
+        }
+
+        #webcam {
+            width: 320px; 
+            height: 240px; 
+            border-radius: 15px; 
+            z-index: 2; 
+        }
+
+        #overlayText {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'serif';
+            font-style: italic; 
+            font-size: 130px; 
+            line-height: 1; 
+            text-align: center;
+            color: #CC1B34; 
+            white-space: nowrap; 
+            z-index: 0; 
+        }
+
+        #rating {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'serif';
+            color: #151515;
+            font-style: italic; 
+            font-size: 720px; 
+            line-height: 1; 
+            text-align: center;
+            z-index: 0; 
+        }
+
+        #ratingMessage {
+            display: none; 
+            font-family: 'serif';
+            font-size: 24px; 
+            font-style: italic;
+            text-align: center;
+            color: #151515;
+            margin-top: 10px;
+            position: absolute;
+            top: calc(50% + 330px); 
+            left: 50%;
+            transform: translate(-50%, 0);
+            z-index: 0; 
+            opacity: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="webcamContainer">
+        <video id="webcam" width="900" height="600" autoplay></video>
+    </div>
+    <div id="overlayText">
+        <i>♥ SHOW US ♥ <br>
+        HOW (UN)SEXY <br><br>
+        HOW (UN)SEXY <br>
+        ♥ YOU ARE♥</i>
+    </div>
+    <div id="rating"></div>
+    <div id="ratingMessage"></div>
+
+    <script>
+       
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                var video = document.getElementById('webcam');
+                video.srcObject = stream;
+
+              
+                video.onloadeddata = function() {
+                    
+                    setTimeout(function() {
+                        rateBeauty();
+                    }, 5000); 
+                };
+            })
+            .catch(function (error) {
+                console.error('Chyba pri získavaní prístupu k webkamere: ', error);
+            });
+
+       
+        function generateRandomRating() {
+            return Math.floor(Math.random() * 10) + 1;
+        }
+
+       
+        function rateBeauty() {
+            var rating = generateRandomRating();
+            
+          
+            document.body.style.backgroundColor = '#CC1B34';
+            
+           
+            document.getElementById('overlayText').style.display = 'none';
+            
+           
+            document.getElementById('rating').style.display = 'block';
+            document.getElementById('rating').innerHTML = '<i>' + rating + '/10</i>';
+
+           
+            var message = "";
+            if (rating >= 1 && rating <= 3) {
+                message = "Ufff...";
+            } else if (rating >= 4 && rating <= 7) {
+                message = "Videl som aj krajších.";
+            } else if (rating >= 8 && rating <= 10) {
+                message = "Pošleš nudesky?";
+            }
+
+           
+            document.getElementById('ratingMessage').style.display = 'block';
+            document.getElementById('ratingMessage').innerHTML = message;
+        }
+    </script>
+</body>
+</html>

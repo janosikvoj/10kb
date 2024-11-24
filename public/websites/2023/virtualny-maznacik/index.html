@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<title>Pet</title>
+<style>:root{--pri80:#faf6f0;--pri90:#f4eae0;--pri100:#f4dfc8;--pri110:#000}*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif;font-weight:600;color:var(--pri110)}body{background-color:var(--pri80);width:100vw;height:100vh;display:flex;justify-content:center;overflow:hidden}.pet__wrapper{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}.pet__ui{position:absolute;bottom:0;margin:6rem 3rem;display:flex;flex-flow:row wrap;justify-content:center;gap:4rem}.pet__stats{font-size:1rem;display:flex;flex-flow:column nowrap;gap:.5rem}.pet__stats label{display:flex;align-items:center;justify-content:space-between}.pet__stats progress{margin-left:1rem;height:.75rem}.pet__buttons{display:flex;flex-flow:row nowrap;gap:1rem}.pet__buttons button{font-size:1rem;padding:1rem 2rem;background-color:var(--pri90);border:0 solid var(--pri110);cursor:pointer}.pet__buttons button:hover{background-color:var(--pri100)}.pet__score{font-size:2rem;font-weight:400;position:absolute;top:6rem;color:var(--pri100);text-align:center}.pet__score b{color:var(--pri110);font-size:4rem}#pet__snack{position:absolute;top:10vh;left:10vw;height:2rem;width:2rem;transform:translate(-50%,-50%);border-radius:50%;cursor:pointer;background-color:var(--pri110);animation:800ms ease-in-out alternate infinite glint}@keyframes glint{from{background-color:var(--pri110)}to{background-color:var(--pri100)}}progress{-webkit-appearance:none}::-webkit-progress-bar{background-color:var(--pri90);border-right:2px solid var(--pri110)}::-webkit-progress-value{background-color:var(--pri110)}::-webkit-progress-inner-element{height:1rem}.pet *{transition:all 500ms ease;stroke:var(--pri110);fill:var(--pri110)}.pet .pet__body{fill:var(--pri90)}.pet.--sad .pet__left-eye{d:path("M 3 4 C 4 4 5 2 5 3 C 5 4 4 5 3 5 C 2 5 1 4 1 3 C 1 2 2 4 3 4 Z")}.pet.--sad .pet__right-eye{d:path("M 10 4 C 11 4 12 2 12 3 C 12 4 11 5 10 5 C 9 5 8 4 8 3 C 8 2 9 4 10 4 Z")}.pet.--sad .pet__mouth{d:path("M 4 8 C 5 7 8 7 9 8 C 8 7 5 7 4 8 Z")}.pet.--hungry .pet__mouth{d:path("M 4 8 C 5 6 8 6 9 8 C 8 10 5 10 4 8 Z")}.pet.--sick .pet__left-eye{d:path("M 1 1 C 3 3 3 3 5 1 C 3 3 3 3 5 5 C 3 3 3 3 1 5 C 3 3 3 3 1 1 Z")}.pet.--sick .pet__right-eye{d:path("M 8 1 C 10 3 10 3 12 1 C 10 3 10 3 12 5 C 10 3 10 3 8 5 C 10 3 10 3 8 1 Z")}.pet.--sick .pet__mouth{d:path("M 4 8 C 5 7 8 7 9 8 C 8 7 5 7 4 8 Z")}.pet.--sick .pet__body{fill:var(--pri80)}.pet.--happy .pet__left-eye{d:path("M 3 1 C 4 1 5 2 5 3 C 5 4 4 2 3 2 C 2 2 1 4 1 3 C 1 2 2 1 3 1 Z")}.pet.--happy .pet__right-eye{d:path("M 10 1 C 11 1 12 2 12 3 C 12 4 11 2 10 2 C 9 2 8 4 8 3 C 8 2 9 1 10 1 Z")}.pet.--happy .pet__mouth{d:path("M 4 8 C 6 8 7 8 9 8 C 8 10 5 10 4 8 Z")}.pet.--happy .pet__body{fill:var(--pri100)}</style>
+</head>
+<body>
+<span class=pet__score>
+<b>0</b><br>
+score
+</span>
+<div class=pet__ui>
+<div class=pet__stats>
+<label>
+Happiness
+<progress id=pet__progress--happiness max=100 value=80></progress>
+</label>
+<label>
+Hunger
+<progress id=pet__progress--hunger max=100 value=80></progress>
+</label>
+<label>
+Health
+<progress id=pet__progress--health max=100 value=80></progress>
+</label>
+</div>
+<div class=pet__buttons>
+<button onclick="handleStat([['health',50],['happiness',-10]])">Medicine</button>
+<button onclick="handleStat([['happiness',10],['hunger',-5]])">Play</button>
+</div>
+</div>
+<div id=pet__snack>
+</div>
+<div class=pet__wrapper>
+<svg class=pet id=pet__svg xmlns=http://www.w3.org/2000/svg width=130 height=110 viewBox="0 0 13 11" overflow=visible>
+<path class=pet__body d="M -2 -2 C 2 -10 11 -10 15 -2 C 18 4 21 12 15 13 C 9 14 4 14 -2 13 C -8 12 -5 4 -2 -2 Z" fill=#EEE stroke=black stroke-width=0.5 stroke-linejoin="round"/>
+<path class=pet__left-eye d="M 3 1 C 4 1 5 2 5 3 C 5 4 4 5 3 5 C 2 5 1 4 1 3 C 1 2 2 1 3 1 Z" stroke=black stroke-width=0.5 stroke-linejoin="round"/>
+<path class=pet__right-eye d="M 10 1 C 11 1 12 2 12 3 C 12 4 11 5 10 5 C 9 5 8 4 8 3 C 8 2 9 1 10 1 Z" stroke=black stroke-width=0.5 stroke-linejoin="round"/>
+<path class=pet__mouth d="M 4 8 C 5 9 8 9 9 8 C 8 9 5 9 4 8 Z" stroke=black stroke-width=0.5 stroke-linejoin="round"/>
+</svg>
+</div>
+<script>var stats={happiness:80,hunger:80,health:80}
+var gameSpeed=1;var score=0;const progressbar={happiness:document.getElementById("pet__progress--happiness"),hunger:document.getElementById("pet__progress--hunger"),health:document.getElementById("pet__progress--health")}
+const svgElement=document.getElementById("pet__svg");const scoreCounterElement=document.querySelector(".pet__score b");function displayStats(){Object.keys(progressbar).forEach(key=>{progressbar[key].value=stats[key];});}
+displayStats();function handleStat(arr){arr.forEach((el)=>{stats[el[0]]+=el[1];})
+displayStats();};function updateStats(){stats.happiness-=5;stats.hunger-=5;if(stats.happiness<30||stats.hunger<30){stats.health-=5;}else if(stats.happiness>60&&stats.hunger>60){stats.health+=5;}
+Object.keys(stats).forEach(key=>{if(stats[key]<0){stats[key]=0;}else if(stats[key]>100){stats[key]=100;}});}
+function updatePet(){if(stats.hunger<30){svgElement.classList.add("--hungry");}else if(petSnackDrag===false){svgElement.classList.remove("--hungry");}
+if(stats.happiness<30){svgElement.classList.add("--sad");}else{svgElement.classList.remove("--sad");}
+if(stats.health==0){svgElement.classList.add("--sick");}else{svgElement.classList.remove("--sick");}
+if(stats.happiness>60&&stats.hunger>60&&stats.health>60){svgElement.classList.add("--happy");}else{svgElement.classList.remove("--happy");}}
+function timer(){setTimeout(()=>{if(stats.health>0){score+=10;}else{return}
+updateStats();displayStats();updatePet();gameSpeed*=0.99;scoreCounterElement.textContent=score;timer();},gameSpeed*1000)}
+timer();const petSnack=document.getElementById("pet__snack");let petSnackDrag=false;let svgElementHovered=false;function elementsOverlap(el1,el2){const domRect1=el1.getBoundingClientRect();const domRect2=el2.getBoundingClientRect();return!(domRect1.top>domRect2.bottom||domRect1.right<domRect2.left||domRect1.bottom<domRect2.top||domRect1.left>domRect2.right);}
+window.addEventListener("mousemove",(e)=>{if(petSnackDrag===true){petSnack.style.top=e.clientY+"px";petSnack.style.left=e.clientX+"px";}})
+window.addEventListener("mousedown",(e)=>{if(petSnack.matches(":hover")){petSnackDrag=true;}
+svgElement.classList.add("--hungry");})
+window.addEventListener("mouseup",(e)=>{if(elementsOverlap(svgElement,petSnack)&&petSnack.matches(":hover")){handleStat([["hunger",30],["happiness",10]]);petSnack.style.top=(Math.random()*80+10)+"vh";petSnack.style.left=(Math.random()*80+10)+"vw";}
+petSnackDrag=false;if(stats.hunger>30){svgElement.classList.remove("--hungry");}})</script>
+</body>
+</html>

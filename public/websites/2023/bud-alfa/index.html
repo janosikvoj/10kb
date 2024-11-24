@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buď Alfa!</title>
+<style>
+     body {
+     margin: 0;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 100vh;
+     font-family: 'Times New Roman', Times, serif;
+     cursor: pointer;
+     transition: background 0.5s ease;
+     background: radial-gradient(ellipse at bottom, #1C1C1C 0%, #1C1C1C 100%);
+     position: relative;
+     color: rgb(255, 255, 255);
+     overflow: hidden;
+     user-select: NONE;
+     cursor: none;
+    blockquote {
+    font-size: 64px;
+    text-align: center;
+    font-weight:700;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 1;
+    font-family:'Times New Roman', Times, serif;
+    color: white;
+    }
+    blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 50px;
+    text-align: center;
+    left: 0;
+    background-color: transparent;
+    pointer-events: none;
+    z-index: -1;
+    font-size: 40px;
+    overflow-wrap: break-word;
+    }
+    .motivation-text {
+    position: absolute;
+    bottom: 40px;
+    text-align: center;
+    width: 100%;
+    font-family: Arial;
+    font-size:13px;
+    font-weight:500;
+    color: #d9d9d9; 
+    }
+    header {
+     text-align: center;
+     position: absolute;
+     top: 5%; 
+     z-index: 1;
+     color: #fff;
+     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+    .mazat{
+    width: 504px;
+    height: 18px;
+    flex-shrink: 0;
+    color: #dcdcdc;
+    text-align: center;
+    font-family: Arial;
+    font-size: 15px;
+    font-size:large;
+    line-height: normal;
+    margin-top: 58px;
+    }
+        #cursor {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.3s ease;
+}
+</style>
+</head>
+<body onclick="generateQuote()">
+  <div id="cursor"></div>
+  <div class="mazat" id="mazat">Vygeneruj si svůj vlastní citát pro dnešní den a zůstaň Alfa!</div>
+  <blockquote id="quote">
+  <p style="position:relative; top:-35px;font-weight:700;">Klikni pro citát!</p>
+  </blockquote>
+  <div class="motivation-text" id="motivationText">Denní dávka motivace</div>
+  <script>
+  const quotes = [
+"Hoďte mě mezi vlky a já se vratím jako vůdce jejich smečky.",
+"Nemožné je pouze slovo.",
+"Lva nezajímá, co si o něm myslí ovce.",
+"Život je hra. A já určuji její pravidla.",
+"Jesliže to chcete vzdát, zamyslete se nad tím, proč jste začali",
+"Nejlepší způsob, jak předpovědět budoucnost, je, vytvořit ji.",
+"Snažte se být nejlepší verzí sebe sama, ne nejlepší kopií někoho jiného.",
+"Alfa nenásleduje trendy, vytváří je.",
+"Život je cesta, ne cíl.",
+"S láskou v srdci není nic nemožné.",
+"Optimismus je tvým klíčem k radosti.",
+"Chyby jsou příležitostmi k učení.",
+"Není to vždycky snadné, ale vždy to stojí za to.",
+"Svoboda spočívá ve schopnosti rozhodovat.",
+"Každý okamžik je příležitostí pro změnu.",
+"Moudrost je poklad, který nikdo nemůže ukrást.",
+"Sny dávají životu barvu.",
+"Štěstí je vnitřní stav, ne závislý na okolnostech.",
+"Síla spočívá v odvaze pokračovat.",
+"Klíčem k míru je přijetí.",
+"Radost spočívá ve sdílení.",
+"Láska je jazyk, který každý rozumí.",
+"Vítězství je cesta, ne konečný bod.",
+"Nikdy není pozdě začít znovu.",
+"Odpouštění je dar, který dáváme sami sobě.",
+"Svět je knihou a ti, kteří necestují, čtou pouze jednu stránku.",
+"Vzdělání je zlatým klíčem k osvícení.",
+"Bez odvahy není pokrok.",
+"Dělejte věci s láskou nebo vůbec.",
+"Každý den je nový začátek.",
+"Úsměv je nejkrásnější jazyk na světě.",
+"Není to vždycky snadné, ale vždy to stojí za to.",
+"Pomáhat druhým je cesta k naplněnému životu.",
+"Život je dobrodružství, ne rutina.",
+"Nikdy nevzdávejte své sny pro pohodlí.",
+    ];
+  let currentQuoteIndex = 0;
+  let clickCount = 0;
+  const resetInterval = 28;
+  let backgroundSize = 100;
+  function generateQuote() {
+  const randomQuote = quotes[currentQuoteIndex];
+  document.getElementById('quote').innerText = `"${randomQuote}"`;
+  document.getElementById('mazat').innerText = ``;
+  const colors = [
+        'radial-gradient(circle at 100% 100%, rgba(61, 30, 20, 1) 10%, rgba(232, 79, 25, 1) 100%)',
+        'radial-gradient(circle at 100% 0%, rgba(234, 217, 255, 1) 0%, rgba(89, 180, 255, 1) 100%)',
+        'radial-gradient(circle at 0% 100%, rgba(18, 134, 136, 1) 0%, rgba(18, 62, 99, 1) 100%)',
+        'radial-gradient(circle at 0% 0%, rgba(191, 96, 109, 1) 0%, rgba(255, 200, 128, 1) 100%)',
+        'radial-gradient(circle at 100% 100%, rgba(255, 191, 200, 1) 0%, rgba(240, 155, 255, 1) 100%)',
+        'radial-gradient(circle at 100% 0%, rgba(255, 249, 150, 1) 0%, rgba(0, 95, 86, 1) 100%)',
+        'radial-gradient(circle at 0% 100%, rgba(255, 266, 162, 1) 0%, rgba(246, 43, 0, 1) 100%)',
+        'radial-gradient(circle at 100% 100%, rgba(197, 247, 253, 1) 10%, rgba(46, 10, 135, 1) 100%)',
+        'radial-gradient(circle at 100% 0%, rgba(200, 255, 233, 1) 0%, rgba(68, 164, 227, 1) 100%)',
+        'radial-gradient(circle at 0% 100%, rgba(64, 42, 174, 1) 0%, rgba(252, 166, 210, 1) 100%)',
+        'radial-gradient(circle at 0% 0%, rgba(204, 226, 255, 1) 0%, rgba(196, 160, 255, 1) 100%)',
+        'radial-gradient(circle at 100% 100%, rgba(255, 170, 210, 1) 0%, rgba(255, 180, 101, 1) 100%)',
+        'radial-gradient(circle at 100% 0%, rgba(10, 94, 69, 1) 0%, rgba(0, 142, 161, 1) 100%)',
+        'radial-gradient(circle at 0% 100%, rgba(255, 109, 143, 1) 0%, rgba(254, 219, 222, 1) 100%)',
+        'radial-gradient(circle at 100% 100%, rgba(61, 30, 20, 1) 10%, rgba(232, 79, 25, 1) 100%)',
+        'radial-gradient(circle at 100% 0%, rgba(128, 198, 255, 1) 0%, rgba(246, 240, 255, 1) 100%)',
+        'radial-gradient(circle at 0% 100%, rgba(18, 134, 136, 1) 0%, rgba(18, 62, 99, 1) 100%)',
+        'radial-gradient(circle at 0% 0%, rgba(191, 96, 109, 1) 0%, rgba(255, 200, 128, 1) 100%)',
+        'radial-gradient(circle at 100% 100%, rgba(255, 191, 200, 1) 0%, rgba(240, 155, 255, 1) 100%)',
+        'radial-gradient(circle at 100% 0%, rgba(255, 249, 150, 1) 0%, rgba(0, 95, 86, 1) 100%)',
+        'radial-gradient(circle at 0% 100%, rgba(255, 266, 162, 1) 0%, rgba(246, 43, 0, 1) 100%)',
+        'radial-gradient(circle at 100% 100%, rgba(61, 30, 20, 1) 10%, rgba(232, 79, 25, 1) 100%)',
+        'radial-gradient(circle at 100% 0%, rgba(128, 198, 255, 1) 0%, rgba(246, 240, 255, 1) 100%)',
+        'radial-gradient(circle at 0% 100%, rgba(18, 134, 136, 1) 0%, rgba(18, 62, 99, 1) 100%)',
+        'radial-gradient(circle at 0% 0%, rgba(191, 96, 109, 1) 0%, rgba(255, 200, 128, 1) 100%)',
+        'radial-gradient(circle at 100% 100%, rgba(255, 191, 200, 1) 0%, rgba(240, 155, 255, 1) 100%)',
+        'radial-gradient(circle at 100% 0%, rgba(255, 249, 150, 1) 0%, rgba(0, 95, 86, 1) 100%)',
+        'radial-gradient(circle at 0% 100%, rgba(255, 266, 162, 1) 0%, rgba(246, 43, 0, 1) 100%)',
+        'radial-gradient(circle at 100% 100%, rgba(61, 30, 20, 1) 10%, rgba(232, 79, 25, 1) 100%)',
+        'radial-gradient(circle at 100% 0%, rgba(128, 198, 255, 1) 0%, rgba(246, 240, 255, 1) 100%)',
+        'radial-gradient(circle at 0% 100%, rgba(18, 134, 136, 1) 0%, rgba(18, 62, 99, 1) 100%)',
+        'radial-gradient(circle at 0% 0%, rgba(191, 96, 109, 1) 0%, rgba(255, 200, 128, 1) 100%)',
+        'radial-gradient(circle at 100% 100%, rgba(255, 191, 200, 1) 0%, rgba(240, 155, 255, 1) 100%)',
+        'radial-gradient(circle at 100% 0%, rgba(255, 249, 150, 1) 0%, rgba(0, 95, 86, 1) 100%)',
+        'radial-gradient(circle at 0% 100%, rgba(255, 266, 162, 1) 0%, rgba(246, 43, 0, 1) 100%)',
+      ];
+      document.body.style.background = colors[currentQuoteIndex];
+      const motivationText = document.getElementById('motivationText');
+      motivationText.style.color = (currentQuoteIndex === 0 || currentQuoteIndex === 2 || currentQuoteIndex === 5 || currentQuoteIndex === 7 || currentQuoteIndex === 9 || currentQuoteIndex === 12 || currentQuoteIndex === 14 || currentQuoteIndex === 16 || currentQuoteIndex === 19 || currentQuoteIndex === 21 || currentQuoteIndex === 23 || currentQuoteIndex === 26 || currentQuoteIndex === 28 || currentQuoteIndex === 30 || currentQuoteIndex === 33) ? 'white' : '#454545';
+      document.getElementById('quote').style.color = (currentQuoteIndex === 0 || currentQuoteIndex === 2 || currentQuoteIndex === 5 || currentQuoteIndex === 7 || currentQuoteIndex === 9 || currentQuoteIndex === 12 || currentQuoteIndex === 14 || currentQuoteIndex === 16 || currentQuoteIndex === 19 || currentQuoteIndex === 21 || currentQuoteIndex === 23 || currentQuoteIndex === 26 || currentQuoteIndex === 28 || currentQuoteIndex === 30 || currentQuoteIndex === 33) ? 'white' : '#2c2c2c';
+      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+      clickCount++;
+      if (clickCount === resetInterval) {
+        clickCount = 0;
+        currentQuoteIndex = 0;
+      }
+      var mujElement = document.getElementById('quote');
+  var noveStyly = {
+    fontSize: '70px',
+    textAlign: 'left',
+    marginRight: '0',
+    width: '80%',
+    margin: '-20% auto',
+    paddingRight: '240px',
+    borderRadius: '10px',
+    position: 'absolute',
+    zIndex: '2',
+    fontFamily: 'Times New Roman, "Times New Roman", Times, serif',
+    maxWidth: '800px',
+    overflowWrap: 'break-word'
+  };
+  Object.assign(mujElement.style, noveStyly);
+    }
+    document.addEventListener('mousemove', (e) => {
+  const cursor = document.getElementById('cursor');
+  cursor.style.left = e.pageX + 'px';
+  cursor.style.top = e.pageY + 'px';
+});
+  </script>
+</body>
+</html>

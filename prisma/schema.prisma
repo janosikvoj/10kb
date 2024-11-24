@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Author {
+  id       Int       @id @default(autoincrement())
+  fname    String
+  sname    String
+  projects Project[]
+}
+
+model Project {
+  id            Int     @id @default(autoincrement())
+  title         String
+  year          Int     @default(2020)
+  description   String  @db.Text
+  Author        Author? @relation(fields: [authorId], references: [id])
+  authorId      Int?
+  path          String  @unique
+  localByteSize Int?
+}

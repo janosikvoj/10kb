@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cyberpunk Canvas</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300&display=swap">
+        <style>
+            body {
+                display: flex;
+                margin: 0;
+                font-size: 25px;
+                overflow: hidden;
+                font-weight: 800;
+                font-family: 'Big Shoulders Display', sans-serif; /* Použití fontu 'Big Shoulders Display' nebo systémového sans-serif fontu, pokud Big Shoulders Display není dostupný */
+            
+        }
+
+        #canvas-container {
+            flex: 1;
+            position: relative;
+        }
+
+        #canvas-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 32px;
+            background: linear-gradient(to right, #ff4e00, #ec9f05, #00f0ff, #00ff7e);
+            color: transparent;
+        }
+
+        #sidebar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 20px;
+            background-color: #000000;
+            text-align: center;
+        }
+
+        #sidebar p {
+            font-size: 22px; /* Zmenšený text o 3 px */
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+            color: #fff;
+            margin: 0; /* Odebrání marginu pro lepší vzhled */
+        }
+
+        #sidebar .highlight,
+        #sidebar .key {
+            display: inline-block;
+            padding: 5px 10px; /* Upravený padding */
+            color: #fff;
+            border: 0.8px solid #fff; /* Bílé ohraničení */
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 0 3px;
+        }
+
+        #save-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-family: sans-serif; /* Použití systémového sans-serif fontu */
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #save-button:hover {
+            background: #000;
+            color: #fff;
+            border: 1px solid #fff;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+    <!-- Kontejner pro plátno -->
+    <div id="canvas-container">
+        <!-- Logo Canvas -->
+        <div id="canvas-logo">Canvas</div>
+
+        <!-- Skript s p5.js kódem -->
+        <script>
+            let currentAppearance = 0;
+            let gradientColors;
+            let logo = document.getElementById("canvas-logo");
+
+            function setup() {
+                createCanvas(windowWidth, windowHeight); // Nastavení velikosti plátna na velikost okna prohlížeče
+                generateGradientColors();
+                updateLogoGradient(); // Aktualizujeme gradient loga na začátku
+            }
+
+            function draw() {
+                background(0);
+                fillPalette();
+                noStroke();
+                let tilesX = 160;
+                let tilesY = 90;
+                let tileW = width / 80;
+                let tileH = height / 45;
+                translate(tileW / 4, tileH / 2);
+
+                for (let x = 0; x < tilesX; x++) {
+                    for (let y = 0; y < tilesY; y++) {
+                        let waveX = 0;
+                        let waveY = 0;
+
+                        // Ovlivnění pohybu vln klávesou mezerník
+                        if (currentAppearance == 0) {
+                            waveX = cos(radians(frameCount + y * -10)) * 500;
+                            waveY = cos(radians(frameCount + y * 10)) * 1100;
+                        } else if (currentAppearance == 1) {
+                            waveX = sin(radians(frameCount + x * 5)) * 300;
+                            waveY = sin(radians(frameCount + y * 8)) * 800;
+                        } else if (currentAppearance == 2) {
+                            waveX = cos(radians(frameCount + x * -2)) * 300;
+                            waveY = sin(radians(frameCount + x * 8)) * 800;
+                        } else if (currentAppearance == 3) {
+                            waveX = sin(radians(frameCount + x * 20)) * 800;
+                            waveY = sin(radians(frameCount + y * -30)) * 800;
+                        } else if (currentAppearance == 4) {
+                            waveX = cos(radians(frameCount + 2 * -2)) * 300;
+                            waveY = cos(radians(frameCount + x * 8)) * 800;
+                        } else if (currentAppearance == 5) {
+                            waveX = cos(radians(frameCount + y * -8)) * 300;
+                            waveY = cos(radians(frameCount + y * 8)) * 800;
+                        } else if (currentAppearance == 6) {
+                            waveX = tan(radians(frameCount + x * 1)) * -300;
+                            waveY = tan(radians(frameCount + y * 1)) * 800;
+                        }
+                        let index = x % gradientColors.length;
+                        fill(gradientColors[index]);
+                        push();
+                        translate(tileW * x + waveX, tileH * x + waveY);
+                        rect(0, 0, tileW / 2, tileH / 2);
+                        pop();
+                    }
+                }
+            }
+
+            function keyPressed() {
+                if (key == " ") {
+                    currentAppearance = (currentAppearance + 1) % 7;
+                } else if (key == "c" || key == "C") {
+                    generateGradientColors();
+                    updateLogoGradient(); // Aktualizujeme gradient loga po změně barev
+                }
+            }
+
+            function generateGradientColors() {
+                gradientColors = new Array(10);
+                for (let i = 0; i < gradientColors.length; i++) {
+                    let inter = map(i, 0, gradientColors.length - 1, 0, 1);
+                    gradientColors[i] = lerpColor(
+                        color(255, 255, 255),
+                        color(random(255), random(255), random(255)),
+                        inter
+                    );
+                }
+            }
+
+            function fillPalette() {}
+
+            function updateLogoGradient() {
+                // Nastavíme nový gradient jako pozadí loga
+                logo.style.background = `linear-gradient(to right, ${gradientColors.map(color => `rgb(${color.levels[0]}, ${color.levels[1]}, ${color.levels[2]})`).join(', ')})`;
+            }
+
+            // Funkce pro uložení aktuálního snímku jako obrázek
+            function saveImage() {
+                saveCanvas('cyberpunk_canvas', 'png');
+            }
+        </script>
+    </div>
+
+    <!-- Levý boční panel -->
+    <div id="sidebar">
+        <!-- Popisná pomůcka -->
+        <p>Použij <span class="highlight">mezerník</span> pro změnu pohybu a klávesnici <span class="key">C</span> na změnu barevné palety.</p>
+    </div>
+
+    <!-- Button pro uložení obrázku -->
+    <button id="save-button" onclick="saveImage()">Uložit obrázek</button>
+</body>
+</html>
