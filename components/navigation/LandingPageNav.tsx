@@ -4,13 +4,22 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import About from '../sections/intro/About';
 
 type landingPageNavigationState = 'about' | 'hero' | 'search';
 
-const LandingPageNav: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const searchParams = useSearchParams();
-  const urlNavigationInput = searchParams.get('nav');
+interface LandingPageNavProps {
+  children: React.ReactNode;
+  left: React.ReactNode;
+  right: React.ReactNode;
+}
+
+const LandingPageNav: React.FC<LandingPageNavProps> = ({
+  children,
+  left,
+  right,
+}) => {
+  const params = useSearchParams();
+  const urlNavigationInput = params.get('nav');
 
   const [navigationState, setNavigationState] =
     useState<landingPageNavigationState>('hero');
@@ -35,12 +44,22 @@ const LandingPageNav: React.FC<React.PropsWithChildren> = ({ children }) => {
     <div className="relative">
       <div
         className={cn(
-          'fixed w-1/2 z-20',
+          'fixed left-0 w-full sm:w-1/2 z-20',
           shiftToDirection !== 'right' && '-translate-x-full',
           'transition-all duration-1000 ease-in-out'
         )}
       >
-        <About />
+        {left}
+      </div>
+
+      <div
+        className={cn(
+          'fixed right-0 w-full sm:w-1/2 z-20',
+          shiftToDirection !== 'left' && 'translate-x-full',
+          'transition-all duration-1000 ease-in-out'
+        )}
+      >
+        {right}
       </div>
 
       <div
@@ -59,6 +78,7 @@ const LandingPageNav: React.FC<React.PropsWithChildren> = ({ children }) => {
             'z-20 absolute -mb-48 inset-0',
             shiftToDirection === 'right' && 'scale-x-100',
             shiftToDirection === 'left' && 'scale-x-100',
+            gradientVisible && 'bg-background/95 sm:bg-background/50',
             !gradientVisible && 'pointer-events-none',
             'transition-all duration-1000 ease-in-out'
           )}

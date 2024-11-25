@@ -25,7 +25,7 @@ export default function RootLayout({
       lang="en"
       className={`${firaCode.variable} antialiased overflow-x-hidden bg-background text-text`}
     >
-      <body className="relative">
+      <body className="relative overflow-x-hidden">
         <div id="top" className="h-0 hidden" />
         <Header />
         {children}

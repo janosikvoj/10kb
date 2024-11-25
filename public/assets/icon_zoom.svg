@@ -1,17 +1,17 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M8 7H7V6L8 6V7Z" fill="#D9D9D9"/>
-<path d="M7 8H6V7L7 7V8Z" fill="#D9D9D9"/>
-<path d="M8 15H7V14H8V15Z" fill="#D9D9D9"/>
-<path d="M14 7H13V6L14 6V7Z" fill="#D9D9D9"/>
-<path d="M15 8H14V7H15V8Z" fill="#D9D9D9"/>
-<path d="M16 16H15V15H16V16Z" fill="#D9D9D9"/>
-<path d="M17 17H16V16H17V17Z" fill="#D9D9D9"/>
-<path d="M18 18H17V17H18V18Z" fill="#D9D9D9"/>
-<path d="M19 19H18V18H19V19Z" fill="#D9D9D9"/>
-<path d="M7 14H6V13H7V14Z" fill="#D9D9D9"/>
-<path d="M14 13V14H13V15H15V13H14Z" fill="#D9D9D9"/>
-<path d="M16 8H15V13H16V8Z" fill="#D9D9D9"/>
-<path d="M8 5V6L13 6V5L8 5Z" fill="#D9D9D9"/>
-<path d="M5 13H6V8H5L5 13Z" fill="#D9D9D9"/>
-<path d="M8 15V16H13V15H8Z" fill="#D9D9D9"/>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="#D9D9D9" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 7H7V6L8 6V7Z" />
+    <path d="M7 8H6V7L7 7V8Z" />
+    <path d="M8 15H7V14H8V15Z" />
+    <path d="M14 7H13V6L14 6V7Z" />
+    <path d="M15 8H14V7H15V8Z" />
+    <path d="M16 16H15V15H16V16Z" />
+    <path d="M17 17H16V16H17V17Z" />
+    <path d="M18 18H17V17H18V18Z" />
+    <path d="M19 19H18V18H19V19Z" />
+    <path d="M7 14H6V13H7V14Z" />
+    <path d="M14 13V14H13V15H15V13H14Z" />
+    <path d="M16 8H15V13H16V8Z" />
+    <path d="M8 5V6L13 6V5L8 5Z" />
+    <path d="M5 13H6V8H5L5 13Z" />
+    <path d="M8 15V16H13V15H8Z" />
 </svg>

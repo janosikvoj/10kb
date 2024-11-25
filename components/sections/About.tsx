@@ -15,7 +15,7 @@ const About = () => {
             alt="Monitor displaying a heart vector illustration."
           />
           <h2 className="leading-tight">
-            Read more about <br className="hidden md:block" />
+            Read more about <br className="sm:hidden md:block" />
             the 10kb webs initiative.
           </h2>
         </hgroup>

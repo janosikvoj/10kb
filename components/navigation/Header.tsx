@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import Action from '../common/Action';
+import SearchField from '../search/SearchField';
 
 const Header = () => {
   return (
@@ -30,31 +30,12 @@ const Header = () => {
               </Link>
             </li>
           </ul>
-          <Link scroll={false} href="/?nav=search">
-            <section
-              role="search"
-              className="justify-self-end hidden sm:flex flex-row gap-2 items-center text-muted"
-            >
-              <Image
-                src="/assets/icon_zoom.svg"
-                alt="Zoom icon"
-                width={24}
-                height={24}
-              />
-              Search
-            </section>
-          </Link>
+          <SearchField className="hidden sm:block" />
         </nav>
       </ResponsiveContainer>
       <section role="search" className="sm:hidden bg-footer">
         <ResponsiveContainer className="flex flex-row gap-2 items-center text-muted py-4">
-          <Image
-            src="/assets/icon_zoom.svg"
-            alt="Zoom icon"
-            width={24}
-            height={24}
-          />
-          Search
+          <SearchField />
         </ResponsiveContainer>
       </section>
     </header>
