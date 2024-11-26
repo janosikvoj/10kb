@@ -8,7 +8,7 @@ export default function Error({
   error: Error & { digest?: string };
 }) {
   return (
-    <div className="h-screen">
+    <main className="h-screen">
       <ResponsiveContainer className="pt-64">
         <ResponsiveContainer>
           <h2 className="text-xl bg-error text-background w-fit">
@@ -19,6 +19,6 @@ export default function Error({
           </p>
         </ResponsiveContainer>
       </ResponsiveContainer>
-    </div>
+    </main>
   );
 }

@@ -63,21 +63,21 @@ const Footer = () => {
             <a
               href="https://showcase.fmk.utb.cz/atelier-digitalni-design/"
               target="_blank"
-              className="bg-info hover:bg-white text-black px-1.5 py-0.5 transition-all"
+              className="bg-info hover:bg-white-lighter text-black px-1.5 py-0.5 transition-all"
             >
               Showcase
             </a>
             <a
               href="https://www.instagram.com/digital.utb/"
               target="_blank"
-              className="bg-info hover:bg-white text-black px-1.5 py-0.5 transition-all"
+              className="bg-info hover:bg-white-lighter text-black px-1.5 py-0.5 transition-all"
             >
               Instagram
             </a>
             <a
               href="https://www.facebook.com/DigitalniDesign"
               target="_blank"
-              className="bg-info hover:bg-white text-black px-1.5 py-0.5 transition-all"
+              className="bg-info hover:bg-white-lighter text-black px-1.5 py-0.5 transition-all"
             >
               Facebook
             </a>

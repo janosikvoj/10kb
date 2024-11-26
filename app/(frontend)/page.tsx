@@ -3,10 +3,10 @@ import ProjectsLibrary from '@/components/sections/projects-library/ProjectsLibr
 
 export default async function LandingPage() {
   return (
-    <div className="w-full">
+    <main className="w-full">
       <Hero />
       <div className="h-64" />
       <ProjectsLibrary />
-    </div>
+    </main>
   );
 }

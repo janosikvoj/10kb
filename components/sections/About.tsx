@@ -7,7 +7,13 @@ const About = () => {
   return (
     <div className="w-full h-screen">
       <ResponsiveContainer className="pt-48">
-        <hgroup className="flex flex-col sm:flex-row sm:items-center gap-4">
+        <LandingPageNavLink
+          to={undefined}
+          className="block text-neutral-lighter w-fit hover:bg-black-lighter px-1.5 py-0.5"
+        >
+          Go back{' ->'}
+        </LandingPageNavLink>
+        <hgroup className="flex flex-col sm:flex-row sm:items-center gap-4 mt-8">
           <Image
             width="32"
             height="32"
@@ -19,12 +25,6 @@ const About = () => {
             the 10kb webs initiative.
           </h2>
         </hgroup>
-        <LandingPageNavLink
-          to={undefined}
-          className="block text-neutral-lighter mt-2 w-fit hover:bg-black-lighter px-1.5 py-0.5"
-        >
-          Go back{' ->'}
-        </LandingPageNavLink>
         <div className="text-sm text-white-darker leading-relaxed mt-8 space-y-2">
           <p>
             An innovative challenge for design students to create websites that

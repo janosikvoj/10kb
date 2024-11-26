@@ -10,11 +10,13 @@ type Corner = {
 interface CornerStrokeEffectProps {
   cornerSize?: cornerSize;
   stroke?: string;
+  className?: string;
 }
 
 const CornerStrokeEffect: React.FC<CornerStrokeEffectProps> = ({
   cornerSize = '0.75rem',
   stroke = 'stroke-info',
+  className,
 }) => {
   const fourCorners: Corner[] = [
     { classes: 'absolute' },
@@ -24,7 +26,9 @@ const CornerStrokeEffect: React.FC<CornerStrokeEffectProps> = ({
   ];
 
   return (
-    <div className={cn('absolute inset-0 pointer-events-none', stroke)}>
+    <div
+      className={cn('absolute inset-0 pointer-events-none', stroke, className)}
+    >
       {fourCorners.map(({ classes }, i) => (
         <svg
           key={i}

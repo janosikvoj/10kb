@@ -80,11 +80,11 @@ const Projects = async () => {
                 return (
                   <Link
                     key={y.year}
-                    href={`/${y.year}`}
+                    href={`/years/${y.year}`}
                     className="hover:bg-black-lighter px-3 py-2"
                   >
                     {y.year}
-                    <span className="text-xs align-top text-info ml-px">
+                    <span className="text-xs align-top text-info font-semibold ml-px">
                       {y.count}
                     </span>
                   </Link>
@@ -121,7 +121,7 @@ const Projects = async () => {
                     className="hover:bg-black-lighter px-3 py-2"
                   >
                     {author.fname} {author.sname}
-                    <span className="text-xs align-top text-info ml-px">
+                    <span className="text-xs align-top text-info ml-px font-semibold">
                       {author._count.projects}
                     </span>
                   </Link>
