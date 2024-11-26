@@ -24,7 +24,7 @@ const Hero = () => {
           <Link
             scroll={false}
             href="/?nav=about"
-            className="block text-surface mt-2 w-fit"
+            className="block text-neutral-lighter mt-2 w-fit"
           >
             {'<- '}Read more
           </Link>
@@ -43,10 +43,10 @@ const Hero = () => {
         </div>
         <div className="hidden sm:block -mt-12">
           <div className="flex flex-col h-full items-center">
-            <p className="text-surface [writing-mode:vertical-lr]">
+            <p className="text-neutral-lighter [writing-mode:vertical-lr]">
               Check out our work
             </p>
-            <div className="w-px my-4 min-h-8 grow bg-surface" />
+            <div className="w-px my-4 min-h-8 grow bg-neutral-lighter" />
             <Image
               className="h-6 w-auto rotate-180"
               width="27"

@@ -15,10 +15,10 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<'input'>>(
             'flex h-9 w-full px-3 py-1',
             'bg-transparent text-base md:text-sm transition-colors',
             type === 'file' &&
-              'p-0 file:px-3 file:py-1 file:mr-3 file:border-0 file:h-full file:bg-white file:text-sm file:font-medium file:text-background',
+              'p-0 file:px-3 file:py-1 file:mr-3 file:border-0 file:h-full file:bg-white file:text-sm file:font-medium file:text-black cursor-pointer file:cursor-pointer',
             'focus-visible:outline focus-visible:-outline-offset-1 disabled:cursor-not-allowed disabled:opacity-50',
             'focus-visible:outline-info',
-            'bg-background placeholder:text-surface'
+            'bg-black placeholder:text-white-lighter'
           )}
           ref={ref}
           {...props}

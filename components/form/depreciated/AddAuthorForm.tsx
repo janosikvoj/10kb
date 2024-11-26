@@ -57,7 +57,7 @@ export const AddAuthorForm: React.FC<AuthorFormContentProps> = ({
   return (
     <>
       <form action={formAction}>
-        <div className="grid grid-cols-1 gap-8 relative text-text max-w-xl">
+        <div className="grid grid-cols-1 gap-8 relative text-white max-w-xl">
           <div className="w-full">
             <label className="font-semibold block mb-2" htmlFor="name">
               First Name
@@ -65,7 +65,7 @@ export const AddAuthorForm: React.FC<AuthorFormContentProps> = ({
             <input
               {...register('fname')}
               type="text"
-              className="block px-4 py-2 bg-background text-text border-surface rounded-md border w-full placeholder:text-surface"
+              className="block px-4 py-2 bg-background text-white border-surface rounded-md border w-full placeholder:text-neutral-lighter"
             />
             <span className="text-error text-sm">
               <ErrorMessage name="fname" errors={errors} />
@@ -78,7 +78,7 @@ export const AddAuthorForm: React.FC<AuthorFormContentProps> = ({
             <input
               {...register('sname')}
               type="text"
-              className="block px-4 py-2 bg-background text-text border-surface rounded-md border w-full placeholder:text-surface"
+              className="block px-4 py-2 bg-background text-white border-surface rounded-md border w-full placeholder:text-neutral-lighter"
             />
             <span className="text-error text-sm">
               <ErrorMessage name="sname" errors={errors} />
@@ -90,7 +90,7 @@ export const AddAuthorForm: React.FC<AuthorFormContentProps> = ({
                 e.preventDefault();
                 setAuthorModal(false);
               }}
-              className="px-4 py-2 bg-background text-text border-surface rounded-md border"
+              className="px-4 py-2 bg-background text-white border-surface rounded-md border"
             >
               Cancel
             </button>
@@ -98,7 +98,7 @@ export const AddAuthorForm: React.FC<AuthorFormContentProps> = ({
               type="submit"
               disabled={pending || !isValid}
               className={cn(
-                'px-4 py-2 bg-text text-background border-surface rounded-md border w-full',
+                'px-4 py-2 bg-white text-black border-surface rounded-md border w-full',
                 (pending || !isValid) && 'bg-surface'
               )}
             >

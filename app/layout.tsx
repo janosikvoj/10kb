@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${firaCode.variable} antialiased overflow-x-hidden bg-background text-text`}
+      className={`${firaCode.variable} antialiased overflow-x-hidden bg-black text-white`}
     >
       <body className="relative overflow-x-hidden">
         <div id="top" className="h-0 hidden" />

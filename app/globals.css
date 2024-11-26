@@ -7,7 +7,7 @@
     scroll-behavior: smooth;
   }
   :root {
-    @apply selection:bg-text selection:text-background;
+    @apply selection:bg-white selection:text-black;
     color-scheme: dark;
   }
 }

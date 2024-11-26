@@ -24,7 +24,7 @@ export const ProjectFormContent: React.FC<ProjectFormContentProps> = ({
   const { pending } = useFormStatus();
 
   return (
-    <div className="grid grid-cols-1 gap-8 relative text-text max-w-xl">
+    <div className="grid grid-cols-1 gap-8 relative text-white max-w-xl">
       {/* --- Title input --- */}
       <div className="w-full">
         <label className="font-semibold block mb-4" htmlFor="title">
@@ -33,7 +33,7 @@ export const ProjectFormContent: React.FC<ProjectFormContentProps> = ({
         <div className="relative">
           <CornerStrokeEffect stroke="stroke-white" />
           <input
-            className="block px-4 py-2 bg-background text-text w-full placeholder:text-surface outline-offset-2"
+            className="block px-4 py-2 bg-black text-white w-full placeholder:text-neutral-lighter outline-offset-2"
             {...register('title')}
             placeholder="10kb web"
             type="text"
@@ -53,7 +53,7 @@ export const ProjectFormContent: React.FC<ProjectFormContentProps> = ({
           <CornerStrokeEffect stroke="stroke-white" />
           <input
             className={cn(
-              'block px-4 py-2 bg-background text-text w-full placeholder:text-surface',
+              'block px-4 py-2 bg-black text-white w-full placeholder:text-neutral-lighter',
               '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
             )}
             {...register('year')}
@@ -74,7 +74,7 @@ export const ProjectFormContent: React.FC<ProjectFormContentProps> = ({
         <div className="relative">
           <CornerStrokeEffect stroke="stroke-white" />
           <textarea
-            className="block px-4 py-2 bg-background text-text w-full placeholder:text-surface"
+            className="block px-4 py-2 bg-black text-white w-full placeholder:text-neutral-lighter"
             {...register('description')}
             placeholder="Lorem ipsum dolor sit amet…"
           />
@@ -90,7 +90,7 @@ export const ProjectFormContent: React.FC<ProjectFormContentProps> = ({
         </label>
         <div className="flex flex-row gap-2">
           <select
-            className="block px-4 py-2 bg-background text-text border-surface rounded-md border w-full placeholder:text-surface"
+            className="block px-4 py-2 bg-black text-white border-neutral-lighter rounded-md border w-full placeholder:text-neutral-lighter"
             {...register('author')}
           >
             {data.authors.map((author) => (
@@ -105,7 +105,7 @@ export const ProjectFormContent: React.FC<ProjectFormContentProps> = ({
               e.preventDefault();
               setAuthorModal(true);
             }}
-            className="px-4 py-2 bg-background text-text border-surface rounded-md border"
+            className="px-4 py-2 bg-black text-white border-neutral-lighter rounded-md border"
           >
             New
           </button>
@@ -120,7 +120,7 @@ export const ProjectFormContent: React.FC<ProjectFormContentProps> = ({
           ZIP file
         </label>
         <input
-          className="block px-4 py-2 bg-background text-text border-surface rounded-md border w-full placeholder:text-surface file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground"
+          className="block px-4 py-2 bg-black text-white border-neutral-lighter rounded-md border w-full placeholder:text-neutral-lighter file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-white"
           {...register('zipFile')}
           type="file"
         />
@@ -132,8 +132,8 @@ export const ProjectFormContent: React.FC<ProjectFormContentProps> = ({
         type="submit"
         disabled={pending || !isValid}
         className={cn(
-          'px-4 py-2 bg-text text-background border-surface rounded-md border w-full',
-          (pending || !isValid) && 'bg-surface'
+          'px-4 py-2 bg-white text-black border-neutral-lighter rounded-md border w-full',
+          (pending || !isValid) && 'bg-neutral-lighter'
         )}
       >
         Send

@@ -6,7 +6,7 @@ import Link from 'next/link';
 const About = () => {
   return (
     <div className="w-full h-screen">
-      <ResponsiveContainer className="pt-64">
+      <ResponsiveContainer className="pt-48">
         <hgroup className="flex flex-col sm:flex-row sm:items-center gap-4">
           <Image
             width="32"
@@ -19,10 +19,14 @@ const About = () => {
             the 10kb webs initiative.
           </h2>
         </hgroup>
-        <Link scroll={false} href="/" className="block text-surface mt-2 w-fit">
+        <Link
+          scroll={false}
+          href="/"
+          className="block text-neutral-lighter mt-2 w-fit"
+        >
           Go back{' ->'}
         </Link>
-        <div className="text-sm text-muted leading-relaxed mt-8 space-y-2">
+        <div className="text-sm text-white-darker leading-relaxed mt-8 space-y-2">
           <p>
             An innovative challenge for design students to create websites that
             are limited to a maximum size of 10 kilobytes.

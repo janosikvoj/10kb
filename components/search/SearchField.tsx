@@ -36,7 +36,7 @@ const SearchField: React.FC<SearchFieldProps> = ({ className }) => {
     <section
       role="search"
       className={cn(
-        'relative justify-self-end flex flex-row gap-2 items-center text-muted',
+        'relative justify-self-end flex flex-row gap-2 items-center text-white',
         className
       )}
     >
@@ -47,8 +47,8 @@ const SearchField: React.FC<SearchFieldProps> = ({ className }) => {
         autoComplete="off"
         id="search"
         className={cn(
-          'peer w-32 py-0.5 pl-8 bg-transparent placeholder:text-text outline-none',
-          'focus-visible:placeholder:text-surface focus-visible:w-64 focus-visible:text-info',
+          'peer w-32 py-0.5 pl-8 bg-transparent placeholder:text-white outline-none',
+          'focus-visible:placeholder:text-neutral-lighter focus-visible:text-info',
           'transition-all duration-500'
         )}
         placeholder="Search…"
@@ -59,7 +59,7 @@ const SearchField: React.FC<SearchFieldProps> = ({ className }) => {
         }}
       />
       <svg
-        className="top-0 ml-0.5 pt-0.5 absolute pointer-events-none fill-text peer-focus-visible:fill-info"
+        className="top-0 ml-0.5 pt-0.5 absolute pointer-events-none fill-white peer-focus-visible:fill-info"
         width="24"
         height="24"
         viewBox="0 0 24 24"

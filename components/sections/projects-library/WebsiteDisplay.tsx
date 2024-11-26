@@ -41,7 +41,7 @@ const WebsiteDisplay: React.FC<WebsiteDisplayProps> = ({
             'allow-scripts' + (isInteractable ? ' allow-same-origin' : '')
           }
         />
-        <div className="absolute inset-0 bg-surface animate-pulse" />
+        <div className="absolute inset-0 bg-neutral-lighter animate-pulse" />
       </div>
     );
   } else

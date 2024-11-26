@@ -10,7 +10,7 @@ const Action: React.FC<ActionProps> = ({ className, children }) => {
   return (
     <span
       className={cn(
-        'bg-transparent text-text hover:bg-footer px-1.5 py-0.5 transition-all',
+        'bg-transparent text-white hover:bg-black-lighter px-1.5 py-0.5 transition-all',
         className
       )}
     >

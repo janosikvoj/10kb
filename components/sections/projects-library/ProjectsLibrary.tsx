@@ -23,7 +23,7 @@ export default async function ProjectsLibrary() {
                   <div className="text-info border-info border px-1.5 py-0.5">
                     {year}
                   </div>
-                  <div className="bg-surface w-8 h-px mx-3 grow min-w-8" />
+                  <div className="bg-neutral-lighter w-8 h-px mx-3 grow min-w-8" />
                   <Image
                     className="h-6 w-auto rotate-180"
                     width="27"

@@ -4,8 +4,8 @@ import ResponsiveContainer from '../common/ResponsiveContainer';
 
 const Footer = () => {
   return (
-    <footer className="relative z-20 mt-48 pt-8 sm:pt-24 pb-24 bg-footer">
-      <div className="absolute bg-gradient-to-t from-background h-48 -mt-48 w-full top-0 pointer-events-none" />
+    <footer className="relative z-20 mt-48 pt-8 sm:pt-24 pb-24 bg-black-lighter">
+      <div className="absolute bg-gradient-to-t from-black h-48 -mt-48 w-full top-0 pointer-events-none" />
       <ResponsiveContainer>
         <hgroup className="flex flex-row items-center gap-4 mb-32">
           <Image
@@ -32,7 +32,7 @@ const Footer = () => {
           </h2>
         </hgroup>
         <div className="flex gap-6 flex-col md:flex-row justify-between md:items-center">
-          <p className="text-muted text-sm">
+          <p className="text-neutral-lighter text-sm">
             Wanna see more cool&nbsp;stuff&nbsp;from&nbsp;us?
           </p>
           <div className="hidden lg:flex flex-row items-center grow mx-16">
@@ -43,7 +43,7 @@ const Footer = () => {
               src="/assets/hand-cursor-pointer-reverse.svg"
               alt="A vector illustration if a pointing hand"
             />
-            <div className="bg-surface w-8 h-px mx-3 grow min-w-8" />
+            <div className="bg-neutral-lighter w-8 h-px mx-3 grow min-w-8" />
             <Image
               className="h-6 w-auto rotate-90 -scale-x-100"
               width="27"
@@ -63,21 +63,21 @@ const Footer = () => {
             <a
               href="https://showcase.fmk.utb.cz/atelier-digitalni-design/"
               target="_blank"
-              className="bg-info hover:bg-white text-background px-1.5 py-0.5 transition-all"
+              className="bg-info hover:bg-white text-black px-1.5 py-0.5 transition-all"
             >
               Showcase
             </a>
             <a
               href="https://www.instagram.com/digital.utb/"
               target="_blank"
-              className="bg-info hover:bg-white text-background px-1.5 py-0.5 transition-all"
+              className="bg-info hover:bg-white text-black px-1.5 py-0.5 transition-all"
             >
               Instagram
             </a>
             <a
               href="https://www.facebook.com/DigitalniDesign"
               target="_blank"
-              className="bg-info hover:bg-white text-background px-1.5 py-0.5 transition-all"
+              className="bg-info hover:bg-white text-black px-1.5 py-0.5 transition-all"
             >
               Facebook
             </a>

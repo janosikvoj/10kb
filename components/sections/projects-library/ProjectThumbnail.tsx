@@ -17,7 +17,7 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
   displayWebsite = true,
 }) => {
   return (
-    <Link href={project.path ?? '#'} className="group hover:bg-footer">
+    <Link href={project.path ?? '#'} className="group hover:bg-black-lighter">
       {displayWebsite && (
         <div className="aspect-video flex justify-center items-center">
           <div className="relative aspect-video w-full">
@@ -27,15 +27,17 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
       )}
       <div
         className={cn(
-          'text-text flex flex-row justify-between items-baseline',
+          'text-white flex flex-row justify-between items-baseline',
           'transition-all',
           displayWebsite && 'pt-6 group-hover:p-3',
-          !displayWebsite && 'flex-col p-3'
+          !displayWebsite && 'flex-col px-3 py-2'
         )}
       >
         <div>
           <h3 className="font-medium">{project.title}</h3>
-          <div className={cn('text-sm', !displayWebsite && 'text-surface')}>
+          <div
+            className={cn('text-sm', !displayWebsite && 'text-neutral-lighter')}
+          >
             {project.Author && (
               <p>{project.Author.fname + ' ' + project.Author.sname}</p>
             )}
@@ -43,7 +45,7 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
           </div>
         </div>
         {displayWebsite && (
-          <div className="text-right text-surface">
+          <div className="text-right text-neutral-lighter">
             <p className="text-sm">{project.year ?? 'XXXX'}</p>
 
             {project.localByteSize && (

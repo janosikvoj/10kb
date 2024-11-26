@@ -13,24 +13,34 @@ const config: Config = {
       sans: ['var(--font-fira-code)'],
     },
     colors: {
-      white: '#FFFFFF',
-      text: '#D9D9D9',
-      muted: '#B8B8B8',
-      surface: '#5C5C5C',
-      background: '#101010',
-      footer: '#181818',
+      // light
+      white: {
+        lighter: '#FFFFFF',
+        DEFAULT: '#D9D9D9',
+        darker: '#B8B8B8',
+      },
+
+      // neutral
+      neutral: {
+        lighter: '#5C5C5C',
+        DEFAULT: '#4C4C4C',
+        darker: '#323232',
+      },
+
+      // dark
+      black: {
+        lighter: '#181818',
+        DEFAULT: '#101010',
+        darker: '#080808',
+      },
+
+      // semantic
       error: '#C35466',
       info: '#0BCFC5',
       success: '#CED65E',
+
+      // other
       transparent: '#00000000',
-    },
-    extend: {
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
-      colors: {},
     },
   },
   plugins: [containerQueries, tailwindAnimate],

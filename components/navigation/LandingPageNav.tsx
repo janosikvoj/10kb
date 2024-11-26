@@ -78,7 +78,7 @@ const LandingPageNav: React.FC<LandingPageNavProps> = ({
             'z-20 absolute -mb-48 inset-0',
             shiftToDirection === 'right' && 'scale-x-100',
             shiftToDirection === 'left' && 'scale-x-100',
-            gradientVisible && 'bg-background/95 sm:bg-background/50',
+            gradientVisible && 'bg-black/95 sm:bg-black/50',
             !gradientVisible && 'pointer-events-none',
             'transition-all duration-1000 ease-in-out'
           )}
@@ -86,7 +86,7 @@ const LandingPageNav: React.FC<LandingPageNavProps> = ({
           <div
             className={cn(
               'absolute w-1/2 h-full left-0',
-              'bg-gradient-to-r from-background to-transparent origin-left from-25%',
+              'bg-gradient-to-r from-black to-transparent origin-left from-25%',
               !gradientVisible && 'scale-x-0',
               'transition-all duration-1000 ease-in-out'
             )}
@@ -94,7 +94,7 @@ const LandingPageNav: React.FC<LandingPageNavProps> = ({
           <div
             className={cn(
               'absolute w-1/2 h-full right-0',
-              'bg-gradient-to-l from-background to-transparent origin-right from-25%',
+              'bg-gradient-to-l from-black to-transparent origin-right from-25%',
               !gradientVisible && 'scale-x-0',
               'transition-all duration-1000 ease-in-out'
             )}

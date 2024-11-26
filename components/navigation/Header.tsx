@@ -7,7 +7,7 @@ import SearchField from '../search/SearchField';
 
 const Header = () => {
   return (
-    <header className="fixed top-0 w-full z-50 bg-background">
+    <header className="fixed top-0 w-full z-50 bg-black">
       <ResponsiveContainer>
         <nav className="py-8 sm:py-12 text-white grid grid-cols-2 sm:grid-cols-[1fr_fit-content(100%)_1fr] items-center justify-between">
           <Link href="/" className="px-1.5 py-0.5">
@@ -33,8 +33,8 @@ const Header = () => {
           <SearchField className="hidden sm:block" />
         </nav>
       </ResponsiveContainer>
-      <section role="search" className="sm:hidden bg-footer">
-        <ResponsiveContainer className="flex flex-row gap-2 items-center text-muted py-4">
+      <section role="search" className="sm:hidden bg-black-lighter">
+        <ResponsiveContainer className="flex flex-row gap-2 items-center text-neutral py-4">
           <SearchField />
         </ResponsiveContainer>
       </section>

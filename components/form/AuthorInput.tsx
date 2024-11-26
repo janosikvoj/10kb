@@ -66,9 +66,14 @@ const AuthorInput: React.FC<SelectSearchAddProps> = ({
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between bg-background px-3 font-normal hover:bg-background text-base md:text-sm"
+            className="w-full justify-between bg-black px-3 font-normal hover:bg-black text-base md:text-sm"
           >
-            <span className={cn('truncate', !selectedAuthor && 'text-surface')}>
+            <span
+              className={cn(
+                'truncate',
+                !selectedAuthor && 'text-neutral-lighter'
+              )}
+            >
               {selectedAuthor
                 ? `${selectedAuthor.fname} ${selectedAuthor.sname}`
                 : 'Select author'}
@@ -76,7 +81,7 @@ const AuthorInput: React.FC<SelectSearchAddProps> = ({
             <ChevronDown
               size={16}
               strokeWidth={2}
-              className="shrink-0 text-muted-foreground/80"
+              className="shrink-0 text-white-darker"
               aria-hidden="true"
             />
           </Button>
