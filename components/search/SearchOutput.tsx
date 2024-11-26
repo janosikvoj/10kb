@@ -11,7 +11,7 @@ async function SearchOutput({
   className,
 }: {
   query: string;
-  className: string;
+  className?: string;
 }) {
   let projects, authors;
 

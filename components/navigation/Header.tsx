@@ -4,6 +4,7 @@ import Link from 'next/link';
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import Action from '../common/Action';
 import SearchField from '../search/SearchField';
+import LandingPageNavLink from './LandingPageNavLink';
 
 const Header = () => {
   return (
@@ -15,14 +16,14 @@ const Header = () => {
           </Link>
           <ul className="flex flex-row gap-8">
             <li>
-              <Link scroll={false} href="/?nav=about">
+              <LandingPageNavLink to="left">
                 <Action>About</Action>
-              </Link>
+              </LandingPageNavLink>
             </li>
             <li>
-              <Link href="/#projects-library" className="px-1.5 py-0.5">
+              <LandingPageNavLink to="right">
                 <Action>Projects</Action>
-              </Link>
+              </LandingPageNavLink>
             </li>
             <li>
               <Link href="/admin" className="px-1.5 py-0.5">

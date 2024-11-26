@@ -1,11 +1,11 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import LandingPageNavLink from './LandingPageNavLink';
 
-type landingPageNavigationState = 'about' | 'hero' | 'search';
+export type landingPageNavigationState = 'left' | undefined | 'right';
 
 interface LandingPageNavProps {
   children: React.ReactNode;
@@ -22,30 +22,24 @@ const LandingPageNav: React.FC<LandingPageNavProps> = ({
   const urlNavigationInput = params.get('nav');
 
   const [navigationState, setNavigationState] =
-    useState<landingPageNavigationState>('hero');
+    useState<landingPageNavigationState>(undefined);
 
   useEffect(() => {
     const newNavigationState =
-      urlNavigationInput === 'about' || urlNavigationInput === 'search'
+      urlNavigationInput === 'left' || urlNavigationInput === 'right'
         ? urlNavigationInput
-        : 'hero';
+        : undefined;
     setNavigationState(newNavigationState);
   }, [urlNavigationInput]);
 
-  const gradientVisible: boolean = navigationState === 'hero' ? false : true;
-  const shiftToDirection: 'right' | 'left' | undefined =
-    navigationState === 'hero'
-      ? undefined
-      : navigationState === 'about'
-      ? 'right'
-      : 'left';
+  const gradientVisible: boolean = navigationState ? true : false;
 
   return (
     <div className="relative">
       <div
         className={cn(
           'fixed left-0 w-full sm:w-1/2 z-20',
-          shiftToDirection !== 'right' && '-translate-x-full',
+          navigationState !== 'left' && '-translate-x-full',
           'transition-all duration-1000 ease-in-out'
         )}
       >
@@ -55,7 +49,7 @@ const LandingPageNav: React.FC<LandingPageNavProps> = ({
       <div
         className={cn(
           'fixed right-0 w-full sm:w-1/2 z-20',
-          shiftToDirection !== 'left' && 'translate-x-full',
+          navigationState !== 'right' && 'translate-x-full',
           'transition-all duration-1000 ease-in-out'
         )}
       >
@@ -65,19 +59,19 @@ const LandingPageNav: React.FC<LandingPageNavProps> = ({
       <div
         className={cn(
           'relative',
-          shiftToDirection === 'right' && 'translate-x-1/3',
-          shiftToDirection === 'left' && '-translate-x-1/3',
+          navigationState === 'left' && 'translate-x-1/3',
+          navigationState === 'right' && '-translate-x-1/3',
           'transition-all duration-1000 ease-in-out'
         )}
       >
-        <Link
+        <LandingPageNavLink
           draggable={false}
           scroll={false}
-          href={'/'}
+          to={undefined}
           className={cn(
             'z-20 absolute -mb-48 inset-0',
-            shiftToDirection === 'right' && 'scale-x-100',
-            shiftToDirection === 'left' && 'scale-x-100',
+            navigationState === 'left' && 'scale-x-100',
+            navigationState === 'right' && 'scale-x-100',
             gradientVisible && 'bg-black/95 sm:bg-black/50',
             !gradientVisible && 'pointer-events-none',
             'transition-all duration-1000 ease-in-out'
@@ -99,7 +93,7 @@ const LandingPageNav: React.FC<LandingPageNavProps> = ({
               'transition-all duration-1000 ease-in-out'
             )}
           />
-        </Link>
+        </LandingPageNavLink>
         {children}
       </div>
     </div>

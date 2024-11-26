@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
-import Link from 'next/link';
+import LandingPageNavLink from '../navigation/LandingPageNavLink';
 
 const Hero = () => {
   return (
@@ -21,13 +21,12 @@ const Hero = () => {
               created by the students of Digital design.
             </h1>
           </hgroup>
-          <Link
-            scroll={false}
-            href="/?nav=about"
-            className="block text-neutral-lighter mt-2 w-fit"
+          <LandingPageNavLink
+            to="left"
+            className="block text-neutral-lighter mt-2 w-fit hover:bg-black-lighter px-1.5 py-0.5"
           >
             {'<- '}Read more
-          </Link>
+          </LandingPageNavLink>
         </ResponsiveContainer>
       </ResponsiveContainer>
 

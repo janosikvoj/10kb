@@ -1,9 +1,5 @@
-import { Project } from '@prisma/client';
+import { Project, Author } from '@prisma/client';
 
 export type ProjectWithAuthor = {
-  Author: {
-    id: number;
-    fname: string;
-    sname: string;
-  } | null;
+  Author: Author | null;
 } & Project;

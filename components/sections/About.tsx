@@ -1,7 +1,7 @@
 import React from 'react';
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import Image from 'next/image';
-import Link from 'next/link';
+import LandingPageNavLink from '../navigation/LandingPageNavLink';
 
 const About = () => {
   return (
@@ -19,13 +19,12 @@ const About = () => {
             the 10kb webs initiative.
           </h2>
         </hgroup>
-        <Link
-          scroll={false}
-          href="/"
-          className="block text-neutral-lighter mt-2 w-fit"
+        <LandingPageNavLink
+          to={undefined}
+          className="block text-neutral-lighter mt-2 w-fit hover:bg-black-lighter px-1.5 py-0.5"
         >
           Go back{' ->'}
-        </Link>
+        </LandingPageNavLink>
         <div className="text-sm text-white-darker leading-relaxed mt-8 space-y-2">
           <p>
             An innovative challenge for design students to create websites that
