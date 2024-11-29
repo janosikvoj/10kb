@@ -1,48 +1,53 @@
-import prisma from '@/lib/prisma';
 import React from 'react';
 import Image from 'next/image';
 
-import ResponsiveContainer from '../../common/ResponsiveContainer';
-import { sortByYear } from './utils';
 import ProjectsGroup from './ProjectsGroup';
-import Link from 'next/link';
+import { ProjectWithAuthor } from './types';
+import { cn } from '@/lib/utils';
 
-export default async function ProjectsLibrary() {
-  try {
-    const projects = await prisma.project.findMany({
-      include: { Author: true },
-    });
-    const projectsByYear = sortByYear(projects);
-    return (
-      <ResponsiveContainer id="projects-library">
-        <div className="space-y-64">
-          {Object.keys(projectsByYear)
-            .reverse()
-            .map((year) => (
-              <div key={year}>
-                <div className="flex flex-row items-center w-1/3 mb-32">
-                  <Link
-                    href={'/years/' + year}
-                    className="bg-info text-black hover:bg-white-lighter px-1.5 py-0.5"
+interface ProjectsLibraryProps {
+  projectsGroups: {
+    [group: string]: ProjectWithAuthor[];
+  };
+}
+
+export default async function ProjectsLibrary({
+  projectsGroups,
+}: ProjectsLibraryProps) {
+  return (
+    <ul className="space-y-6">
+      {Object.keys(projectsGroups)
+        .reverse()
+        .map((group, i) => (
+          <li key={group}>
+            <details className="group/projects" open={i === 0}>
+              <summary className="list-none cursor-pointer select-none">
+                <div className="flex flex-row items-center">
+                  <h2
+                    className={cn(
+                      'w-fit text-info border-info border px-1.5 py-0.5 select-none',
+                      'group-open/projects:text-black group-open/projects:bg-info',
+                      'hover:border-white-lighter hover:text-white-lighter hover:group-open/projects:bg-white-lighter'
+                    )}
                   >
-                    {year}
-                  </Link>
-                  <div className="bg-neutral-lighter w-8 h-px mx-3 grow min-w-8" />
+                    {group}
+                  </h2>
                   <Image
-                    className="h-6 w-auto rotate-180"
+                    className="ml-16 h-6 w-auto -rotate-90 group-open/projects:-rotate-180 transition-all"
                     width="27"
                     height="33"
                     src="/assets/hand-cursor-pointer-reverse.svg"
                     alt="A vector illustration if a pointing hand"
                   />
+                  <div className="bg-neutral-darker w-8 h-px mx-3 grow min-w-8" />
                 </div>
-                <ProjectsGroup projects={projectsByYear[Number(year)]} />
+              </summary>
+              <div className="mt-20 mb-32">
+                <ProjectsGroup projects={projectsGroups[group]} />
               </div>
-            ))}
-        </div>
-      </ResponsiveContainer>
-    );
-  } catch {
-    throw new Error("Can't connect to the database.");
-  }
+            </details>
+          </li>
+        ))}
+    </ul>
+  );
 }

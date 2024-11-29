@@ -55,7 +55,7 @@ const Projects = async () => {
   ];
 
   return (
-    <div className="w-full h-screen bg-black">
+    <div className="w-full h-screen">
       <ResponsiveContainer className="pt-48">
         <LandingPageNavLink
           to={undefined}
@@ -92,7 +92,7 @@ const Projects = async () => {
               })}
               {uniqueYearsWithProjectCount.length > MAX_LINK_COUNT && (
                 <Link
-                  href={'/#projects-library'}
+                  href={'/years'}
                   className="hover:bg-black-lighter px-3 py-2 col-span-3 text-neutral-lighter"
                 >
                   Show {uniqueYearsWithProjectCount.length - MAX_LINK_COUNT}{' '}

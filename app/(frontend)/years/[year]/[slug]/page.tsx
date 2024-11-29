@@ -21,17 +21,17 @@ export default async function ProjectPage({
 
   if (project) {
     return (
-      <main className="w-full">
-        <ResponsiveContainer className="pt-48">
+      <main className="w-full pt-64 sm:pt-48">
+        <ResponsiveContainer>
           <Link
-            href="/"
+            href="/years"
             className="absolute block text-neutral-lighter -mt-12 w-fit hover:bg-black-lighter px-1.5 py-0.5"
           >
-            {'<- '}Read more
+            {'<- '}All projects
           </Link>
-          <div className="grid grid-cols-3 gap-16">
+          <div className="sm:grid grid-cols-3 gap-16">
             <div>
-              <hgroup className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <hgroup className="flex flex-row items-center gap-4">
                 <Image
                   width="32"
                   height="32"
@@ -63,7 +63,7 @@ export default async function ProjectPage({
                     Year of creation
                   </h2>
                   <Link
-                    href={`/${project.year}`}
+                    href={`/years/${project.year}`}
                     className="group hover:border-b -mr-0.5"
                   >
                     {project.year}
@@ -85,22 +85,39 @@ export default async function ProjectPage({
                 href={`/websites/${project.path}/index.html`}
                 target="_blank"
                 className={cn(
+                  'hidden',
                   'group/new-tab relative w-fit mt-12',
-                  'flex justify-center items-center',
+                  'sm:flex justify-center items-center',
                   'text-info hover:text-white'
                 )}
               >
                 <CornerStrokeEffect className="group-hover/new-tab:stroke-white" />
-                <span className="p-2 pl-3 pr-1.5">See website</span>
+                <span className="py-1.5 pl-3 pr-1.5">Visit site</span>
                 <div className="size-8 pl-0.5 group-hover/new-tab:pl-1.5 -rotate-45 text-nowrap transition-all">
                   {'->'}
                 </div>
               </a>
             </div>
-            <div className="col-span-2">
+            <div className="col-span-2 mt-8 sm:mt-0">
               <div className="relative aspect-video">
                 <WebsiteDisplay path={project.path} zoom={2} isInteractable />
               </div>
+
+              <a
+                href={`/websites/${project.path}/index.html`}
+                target="_blank"
+                className={cn(
+                  'group/new-tab relative mt-4',
+                  'sm:hidden flex justify-center items-center',
+                  'text-info hover:text-white'
+                )}
+              >
+                <CornerStrokeEffect className="group-hover/new-tab:stroke-white" />
+                <span className="py-1.5 pl-3 pr-1.5">Visit site</span>
+                <div className="size-8 pl-0.5 group-hover/new-tab:pl-1.5 -rotate-45 text-nowrap transition-all">
+                  {'->'}
+                </div>
+              </a>
 
               <div className="mt-8">
                 <h2 className="mb-2 font-medium">Description</h2>

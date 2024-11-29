@@ -7,6 +7,7 @@ import LandingPageNav from '@/components/navigation/LandingPageNav';
 import About from '@/components/sections/About';
 import Projects from '@/components/sections/Projects';
 import ScrollToTopButton from '@/components/navigation/ScrollToTopButton';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: '10kb webs',
@@ -30,15 +31,17 @@ export default function RootLayout({
       className={`${firaCode.variable} antialiased overflow-x-hidden bg-black text-white`}
     >
       <body className="relative overflow-x-hidden">
-        <div id="top" className="h-0 hidden" />
-        <Header />
-        <div className="fixed bottom-0 right-0 m-8 z-50">
-          <ScrollToTopButton />
-        </div>
-        <LandingPageNav left={<About />} right={<Projects />}>
-          {children}
-        </LandingPageNav>
-        <Footer />
+        <Suspense>
+          <div id="top" className="h-0 hidden" />
+          <Header />
+          <div className="fixed bottom-0 right-0 m-8 z-50">
+            <ScrollToTopButton />
+          </div>
+          <LandingPageNav left={<About />} right={<Projects />}>
+            {children}
+          </LandingPageNav>
+          <Footer />
+        </Suspense>
       </body>
     </html>
   );

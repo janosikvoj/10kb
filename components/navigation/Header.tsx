@@ -22,7 +22,7 @@ const Header = () => {
             </li>
             <li>
               <LandingPageNavLink to="right">
-                <Action>Projects</Action>
+                <Action>Browse</Action>
               </LandingPageNavLink>
             </li>
             <li>

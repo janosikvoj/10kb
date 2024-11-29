@@ -17,8 +17,10 @@ const Hero = () => {
             />
             <h1 className="leading-tight">
               Collection of lightweight sites,{' '}
-              <br className="hidden md:block" />
-              created by the students of Digital design.
+              {/* <br className="hidden md:block" /> */}
+              created by students from the Digital Design Studio, Faculty of
+              Multimedia Communications, Tomas Bata University in Zlin, Czech
+              Republic.
             </h1>
           </hgroup>
           <LandingPageNavLink

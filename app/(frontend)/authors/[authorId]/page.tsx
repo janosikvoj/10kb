@@ -1,6 +1,7 @@
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import ProjectsGroup from '@/components/sections/projects-library/ProjectsGroup';
 import prisma from '@/lib/prisma';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 export default async function AuthorPage({
@@ -25,8 +26,20 @@ export default async function AuthorPage({
     });
 
     return (
-      <main className="w-full">
-        <ResponsiveContainer className="pt-64">
+      <main className="w-full pt-64 sm:pt-48">
+        <ResponsiveContainer>
+          <Link
+            href="/authors"
+            className="absolute block text-neutral-lighter -mt-12 w-fit hover:bg-black-lighter px-1.5 py-0.5"
+          >
+            {'<- '}All authors
+          </Link>
+          <h1 className="text-4xl font-medium mb-64">
+            Projects by{' '}
+            <span className="bg-success px-2 text-black">
+              {author.fname + ' ' + author.sname}
+            </span>
+          </h1>
           <ProjectsGroup projects={projects} />
         </ResponsiveContainer>
       </main>

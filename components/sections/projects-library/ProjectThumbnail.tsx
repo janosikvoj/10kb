@@ -30,7 +30,7 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
           {'->'}
         </div>
       </a>
-      <Link href={project.path ?? '#'}>
+      <Link href={`/years/${project.path}`}>
         {displayWebsite && (
           <div className="aspect-video flex justify-center items-center">
             <div className="relative aspect-video w-full">
