@@ -10,8 +10,9 @@ import ScrollToTopButton from '@/components/navigation/ScrollToTopButton';
 import { Suspense } from 'react';
 
 export const metadata: Metadata = {
-  title: '10kb webs',
+  title: '10kB Websites',
   description: 'Databáze webů vytvořených Ateliérem Digitální design.',
+  keywords: ['website gallery', '10 kb', 'performance', 'optimization'],
 };
 
 const firaCode = Fira_Code({

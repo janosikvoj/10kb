@@ -1,8 +1,13 @@
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import ProjectsGroup from '@/components/sections/projects-library/ProjectsGroup';
 import prisma from '@/lib/prisma';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+export const metadata: Metadata = {
+  title: '10kB Year',
+};
 
 export default async function YearPage({
   params,

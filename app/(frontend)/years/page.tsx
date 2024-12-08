@@ -2,8 +2,13 @@ import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import ProjectsLibrary from '@/components/sections/projects-library/ProjectsLibrary';
 import { sortByYear } from '@/components/sections/projects-library/utils';
 import prisma from '@/lib/prisma';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+export const metadata: Metadata = {
+  title: '10kB Years',
+};
 
 export default async function YearsPage() {
   try {

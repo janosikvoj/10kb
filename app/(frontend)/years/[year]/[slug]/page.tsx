@@ -6,6 +6,11 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '10kB Project',
+};
 
 export default async function ProjectPage({
   params,

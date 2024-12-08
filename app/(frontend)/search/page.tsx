@@ -4,8 +4,13 @@ import ProjectsGroup from '@/components/sections/projects-library/ProjectsGroup'
 import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Metadata } from 'next';
 
 const MIN_QUERY_LENGTH: number = 2;
+
+export const metadata: Metadata = {
+  title: '10kB Search',
+};
 
 async function fetchQueriedData(query: string) {
   if (!query || query.length < MIN_QUERY_LENGTH)

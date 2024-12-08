@@ -2,8 +2,13 @@ import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import ProjectsLibrary from '@/components/sections/projects-library/ProjectsLibrary';
 import { ProjectWithAuthor } from '@/components/sections/projects-library/types';
 import prisma from '@/lib/prisma';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+export const metadata: Metadata = {
+  title: '10kB Authors',
+};
 
 export default async function AuthorsPage() {
   try {
