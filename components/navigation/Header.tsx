@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 w-full z-50 bg-black">
       <ResponsiveContainer>
-        <nav className="py-8 sm:py-12 text-white grid grid-cols-2 sm:grid-cols-[1fr_fit-content(100%)_1fr] items-center justify-between">
+        <nav className="py-8 sm:py-12 text-white grid grid-cols-[1fr_fit-content(100%)] sm:grid-cols-[1fr_fit-content(100%)_1fr] items-center justify-between">
           <Link href="/" className="px-1.5 py-0.5">
             <Action className="font-semibold">10kb webs</Action>
           </Link>
@@ -24,11 +24,6 @@ const Header = () => {
               <LandingPageNavLink to="right">
                 <Action>Browse</Action>
               </LandingPageNavLink>
-            </li>
-            <li>
-              <Link href="/admin" className="px-1.5 py-0.5">
-                <Action>Admin</Action>
-              </Link>
             </li>
           </ul>
           <SearchField className="hidden sm:block" />
