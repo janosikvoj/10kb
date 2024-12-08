@@ -43,6 +43,17 @@ const SearchField: React.FC<SearchFieldProps> = ({ className }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  function handleClick() {
+    const params = new URLSearchParams(searchParams);
+    params.delete('nav');
+    router.replace(`/search?${params.toString()}`, { scroll: false });
+  }
+
+  function handleBlur() {
+    const params = new URLSearchParams(searchParams);
+    if (params.get('query') === null) router.push('/', { scroll: false });
+  }
+
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
     if (term) {
@@ -76,6 +87,8 @@ const SearchField: React.FC<SearchFieldProps> = ({ className }) => {
         onChange={(e) => {
           handleSearch(e.target.value);
         }}
+        onClick={handleClick}
+        onBlur={handleBlur}
       />
       <SearchIcon className="fill-white peer-focus-visible:fill-info" />
     </section>

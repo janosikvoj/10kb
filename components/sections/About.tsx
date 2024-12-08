@@ -34,6 +34,11 @@ const About = () => {
             The project serves as a platform for students to learn and
             experiment, and inspire future designers.
           </p>
+          <p>
+            Created by students from the Digital Design Studio, Faculty of
+            Multimedia Communications, Tomas Bata University in Zlin, Czech
+            Republic.
+          </p>
         </div>
       </ResponsiveContainer>
     </div>

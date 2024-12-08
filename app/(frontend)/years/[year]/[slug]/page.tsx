@@ -5,12 +5,17 @@ import prisma from '@/lib/prisma';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 export default async function ProjectPage({
   params,
 }: {
   params: Promise<{ year: string; slug: string }>;
 }) {
+  try {
+  } catch {
+    notFound();
+  }
   const { year, slug } = await params;
   const project = await prisma.project.findUnique({
     where: { path: `/${year}/${slug}` },
@@ -131,10 +136,6 @@ export default async function ProjectPage({
       </main>
     );
   } else {
-    return (
-      <div className="w-full h-screen flex flex-col justify-center items-center">
-        There was an error.
-      </div>
-    );
+    notFound();
   }
 }
