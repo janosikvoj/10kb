@@ -77,95 +77,104 @@ export default function AddProjectForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Title</FormLabel>
-              <FormControl>
-                <Input placeholder="10kb web" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is the name of the website.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="year"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Year</FormLabel>
-              <FormControl>
-                <Input type="number" placeholder="2024" {...field} />
-              </FormControl>
-              <FormDescription>Project completion year.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="author"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Author</FormLabel>
-              <AuthorInput field={field} authors={data.authors} form={form} />
-              <FormDescription>
-                Select an author from the database or add a new one.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Description</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Lorem ipsum dolor sit amet…"
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription>
-                This text will be visible on a detail page.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="zipFile"
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          render={({ field: { value, onChange, ...fieldProps } }) => (
-            <FormItem>
-              <FormLabel>ZIP File</FormLabel>
-              <FormControl>
-                <Input
-                  {...fieldProps}
-                  accept="application/zip, application/x-zip-compressed"
-                  type="file"
-                  onChange={(event) =>
-                    onChange(event.target.files && event.target.files[0])
-                  }
-                />
-              </FormControl>
-              <FormDescription>
-                Upload a ZIP file that contains an index.html.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="md:grid grid-cols-2 gap-16 mb-16">
+          <div className="flex flex-col gap-8">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="10kb web" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is the name of the website.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="year"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Year</FormLabel>
+                  <FormControl>
+                    <Input type="number" placeholder="2024" {...field} />
+                  </FormControl>
+                  <FormDescription>Project completion year.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="author"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Author</FormLabel>
+                  <AuthorInput
+                    field={field}
+                    authors={data.authors}
+                    form={form}
+                  />
+                  <FormDescription>
+                    Select an author from the database or add a new one.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex flex-col gap-8">
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Lorem ipsum dolor sit amet…"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    This text will be visible on a detail page.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="zipFile"
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              render={({ field: { value, onChange, ...fieldProps } }) => (
+                <FormItem>
+                  <FormLabel>ZIP File</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...fieldProps}
+                      accept="application/zip, application/x-zip-compressed"
+                      type="file"
+                      onChange={(event) =>
+                        onChange(event.target.files && event.target.files[0])
+                      }
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Upload a ZIP file that contains an index.html.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
         <Button type="submit" className="w-full">
           {isPending ? 'Loading…' : 'Submit'}
         </Button>

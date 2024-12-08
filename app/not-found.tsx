@@ -9,12 +9,10 @@ export default function NotFound() {
   const router = useRouter();
 
   return (
-    <main className="w-full pt-64 sm:pt-48 h-screen">
-      <ResponsiveContainer>
-        <Unhappy404 className="w-full h-auto max-h-[30vh]" />
-
+    <main className="relative w-full h-screen">
+      <ResponsiveContainer className="pt-64">
         <ResponsiveContainer>
-          <hgroup className="mt-16 flex flex-col sm:flex-row sm:items-center gap-4">
+          <hgroup className="flex flex-col sm:flex-row sm:items-center gap-4">
             <Image
               width="32"
               height="32"
@@ -34,6 +32,12 @@ export default function NotFound() {
           </hgroup>
         </ResponsiveContainer>
       </ResponsiveContainer>
+
+      <div className="absolute bottom-0 px-6 pb-6 w-full flex justify-end">
+        <div>
+          <Unhappy404 className="w-full h-auto max-h-[50vh]" />
+        </div>
+      </div>
     </main>
   );
 }
