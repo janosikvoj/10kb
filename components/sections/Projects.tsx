@@ -16,7 +16,7 @@ async function fetchProjects() {
     });
     return projects;
   } catch {
-    throw new Error('Failed to fetch projects');
+    return [];
   }
 }
 
@@ -27,7 +27,7 @@ async function fetchAuthors() {
     });
     return authors;
   } catch {
-    throw new Error('Failed to fetch authors');
+    return [];
   }
 }
 
