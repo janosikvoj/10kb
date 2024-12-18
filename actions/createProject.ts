@@ -12,7 +12,7 @@ import {
 import { slugify } from '@/lib/utils';
 import { ActionState } from '@/types/ActionState';
 
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 const WEBSITES_DIR = path.resolve(process.cwd(), 'public', 'websites');
 
