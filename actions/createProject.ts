@@ -21,6 +21,12 @@ export async function createProject(
   inputData: AddProjectSchema
 ): Promise<ActionState> {
   DEV_MODE && console.log('Server action initiated.');
+  if (process.env.MODE == 'prod') {
+    return {
+      status: 'error',
+      message: 'Project creation is not allowed.',
+    };
+  }
 
   //———————————————————————————
   // PARSE FORM DATA

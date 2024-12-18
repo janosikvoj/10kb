@@ -9,6 +9,13 @@ export async function createAuthor(
   state: ActionState,
   inputData: AddAuthorSchema
 ): Promise<ActionState> {
+  if (process.env.MODE == 'prod') {
+    return {
+      status: 'error',
+      message: 'Author creation is not allowed.',
+    };
+  }
+
   //———————————————————————————
   // PARSE FORM DATA
   //———————————————————————————

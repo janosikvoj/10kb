@@ -65,6 +65,10 @@ export default function AddProjectForm({
           message: error.message,
         });
       });
+      toast({
+        title: 'Failure',
+        description: state.message,
+      });
     }
     if (state.status === 'success') {
       toast({
