@@ -1,0 +1,89 @@
+.duck{
+    width: calc(12px * 6);
+    height: calc(12px * 6);
+    image-rendering: pixelated;
+    position: absolute;
+    left: calc(50% - 12px / 3);
+    top: calc(50% - 12px / 3);
+    z-index: 1;
+}
+
+.shot{
+    width: calc(12px * 10);
+    height: calc(12px * 10);
+    image-rendering: pixelated;
+    position: absolute;
+    left: calc(50% - 12px / 5);
+    top: calc(50% - 12px / 5);
+    z-index: 1;
+    pointer-events: none;
+}
+.text {
+    position: relative;
+    top: 50px;
+}
+main {
+    height: 100%;
+    width: 100%;
+}
+h1{
+    z-index: 100;
+    position: static;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+h2{
+    z-index: 100;
+    position: static;
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+    background-color: black;
+    color: white;
+    overflow: hidden;
+} 
+
+html {
+    height: 100vh;
+    width: 100vw;
+    user-select: none;
+}
+
+#start-screen {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+    z-index: 100;
+}
+
+#start-screen button {
+    margin-top: 20px;
+    background-color: black;
+    border: 2px solid white;
+    font-family: inherit;
+    color: white;
+    padding: 10px 20px;
+}
+#start-screen button:hover {
+    background-color: white;
+    border: 2px solid white;
+    font-family: inherit;
+    color: black;
+    padding: 10px 20px;
+}
