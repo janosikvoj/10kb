@@ -11,6 +11,8 @@ import {
 } from '@/lib/validation/addProject';
 import { slugify } from '@/lib/utils';
 import { ActionState } from '@/types/ActionState';
+import { cookies } from 'next/headers';
+import * as jose from 'jose';
 
 const DEV_MODE = false;
 
@@ -21,10 +23,48 @@ export async function createProject(
   inputData: AddProjectSchema
 ): Promise<ActionState> {
   DEV_MODE && console.log('Server action initiated.');
-  if (process.env.MODE == 'prod') {
+
+  //———————————————————————————
+  // JWT Authentication Check
+  //———————————————————————————
+
+  const adminCookies = await cookies();
+  const adminSessionToken = adminCookies.get('adminSession')?.value;
+
+  if (!adminSessionToken) {
     return {
       status: 'error',
-      message: 'Project creation is not allowed.',
+      message: 'Authentication required. Please log in again.',
+    };
+  }
+
+  try {
+    const jwtSecretKey = process.env.JWT_SECRET_KEY;
+    if (!jwtSecretKey) {
+      console.error(
+        'JWT_SECRET_KEY is not set in environment variables (Server Action)!'
+      );
+      return { status: 'error', message: 'Server configuration error' };
+    }
+
+    // 1. Verify JWT using jose
+    const secret = new TextEncoder().encode(jwtSecretKey);
+    const { payload: verifiedToken } = await jose.jwtVerify(
+      adminSessionToken,
+      secret,
+      {
+        algorithms: ['HS256'],
+      }
+    );
+
+    if (!verifiedToken.isAdmin) {
+      throw new Error('Not an admin');
+    }
+  } catch (error) {
+    console.error('JWT verification failed in Server Action:', error);
+    return {
+      status: 'error',
+      message: 'Session invalid. Please log in again.',
     };
   }
 
@@ -124,9 +164,9 @@ export async function createProject(
 
     readData();
 
-    await new Promise((resolve, reject) => {
-      writeStream.on('finish', resolve);
-      writeStream.on('error', reject);
+    await new Promise<void>((resolve, reject) => {
+      writeStream.on('finish', () => resolve());
+      writeStream.on('error', (error) => reject(error));
     });
 
     // Try to extract the zipFile

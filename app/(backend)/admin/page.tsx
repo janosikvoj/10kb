@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: '10kB Admin',
 };
 
+//todo Add logout button
+//todo Add project and author delete action
+
 export default async function Admin() {
   try {
     const authors = await prisma.author.findMany();

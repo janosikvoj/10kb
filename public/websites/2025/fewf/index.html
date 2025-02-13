@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<meta http-equiv=X-UA-Compatible content="ie=edge">
+<title>Data-zoom</title>
+<style>*{font-family:'Courier New',monospace;box-sizing:border-box;margin:0;padding:0}:root{--wht:#FFF;--pri:#1b0bff;--blc:#000}body{background-color:var(--wht);overflow:hidden}.graphic__container{width:100%;height:100vh;padding:10% 10% 20rem 10%;display:flex;align-items:center;justify-content:center}.graphic__color-overlay{z-index:1;position:absolute;width:100%;height:100%;bottom:0;background-color:var(--wht);mix-blend-mode:saturation;pointer-events:none}#graphic__HTML{z-index:0;word-break:break-all;overflow-wrap:break-word;font-size:1rem;text-align:center;transition:all 100ms ease;cursor:default}@media only screen and (max-width:600px){html{font-size:12px}.graphic__container{padding-bottom:10rem}.graphic__tooltip{transform: translate(-50%, calc(-100% - 1rem))!important;}}@media only screen and (max-width:340px){html{font-size:8px}.graphic__container{padding-bottom:10rem}}.graphic__tooltip{position:absolute;transform:translate(1rem,-100%);z-index:2;pointer-events:none;white-space:nowrap;font-family:sans-serif;padding:1rem 2rem;border-radius:2px;box-shadow:0 .5rem 1rem rgba(1,1,1,0.1);background-color:var(--wht)}.graphic__tooltip.--hidden{display:none}.graphic__tooltip span{background-color:var(--pri);color:var(--wht);font-weight:600;padding:.1rem .5rem;border-radius:.2rem}.graphic__symbol{filter:blur(0px);opacity:1;transition:all 400ms ease;display:none;margin-bottom:1rem}.--loading{filter:blur(4px);opacity:.5;transition:all 200ms ease}.graphic__symbol:nth-child(1){display:block}.text__container{color:var(--blc);position:absolute;bottom:0;width:100%;z-index:3;display:flex;flex-flow:column nowrap;justify-content:center;align-items:center;padding:2rem 2rem 8rem 2rem}#data{font-size:5rem;font-weight:600;margin-right:.5rem;color:var(--pri)}#unit{font-size:3rem;color:var(--pri)}#bits{font-size:1rem}</style>
+</head>
+<body>
+<div class=graphic__container>
+<div class=graphic__color-overlay></div>
+<div id=graphic__HTML></div>
+</div>
+<div id=graphic__tooltip class="graphic__tooltip --hidden">one character = <span>1 KB</span></div>
+<div class=text__container>
+<div>
+<span id=data></span><span id=unit></span>
+</div>
+<span id=bits></span>
+</div>
+<script>var scrollAmount=0;var scrollSpeed=10;var bytes=scrollToBytes(scrollAmount);var data=0;var unit="B";var bits=0;const abbreviations=['B','KB','MB','GB','TB','PB','EB','ZB','YB','BB'];const characters="🅰️📄🖼️🎬💽🧠🗣️📁❄️🔮";const symbols=[["🅰",1,"one character","1 B"],["📄",2500,"page of text","2.5 KB"],["🖼️",3500000,"picture on iPhone","3.5 MB"],["🎬",3000000000,"20min of FullHD video","3 GB"],["💽",1000000000000,"average modern HDD","1 TB"],["🧠",2500000000000000,"human brain capacity","2.5 PB"],["🗣️",5000000000000000000,"all words ever spoken","5 EB"],["📁",9000000000000000000000,"all stored data","1 ZB"],["❄️",9e+24,"number of snowflakes per year","1 YB"],["🖥️",1e+27]];symbols.reverse();const graphicHTML=document.getElementById("graphic__HTML");const graphicTooltip=document.querySelector(".graphic__tooltip");updateText();displayGraphic();adjustFontSize();function solveData(B){let orderOfMagnitude=10**3;var i=Math.floor(Math.log(B)/Math.log(orderOfMagnitude));data=(B/Math.pow(orderOfMagnitude,i));unit=abbreviations[i];return{data:data,unit:unit}}
+function updateText(){document.getElementById("data").innerText=Math.round(solveData(bytes).data*100)/100;document.getElementById("unit").innerText=solveData(bytes).unit;document.getElementById("bits").innerText="~"+(bytes*8).toLocaleString('fullwide',{useGrouping:false})+" bits";}
+function scrollToBytes(scroll){return Math.round(10**(scroll/(100*scrollSpeed)));}
+function bytesToEmoji(B){let n=B;let emojiHTML="";for(let i=0;i<symbols.length;i++){symbolsInN=Math.floor(n/symbols[i][1]);n-=symbolsInN*symbols[i][1];if(symbolsInN>0){emojiHTML+="<div class='graphic__symbol --"+i+"'>";for(let u=0;u<symbolsInN;u++)emojiHTML+=symbols[i][0];emojiHTML+="</div>";}}
+return emojiHTML;}
+function visibleLength(str){return[...new Intl.Segmenter().segment(str)].length}
+function extractFirstNumber(inputString){const match=inputString.match(/\d+/);if(match){return parseInt(match[0],10);}
+return null;}
+function displayGraphic(){graphicHTML.innerHTML=bytesToEmoji(bytes);graphicTooltip.innerHTML=symbols[extractFirstNumber(bytesToEmoji(bytes))][2]+" = <span>"+symbols[extractFirstNumber(bytesToEmoji(bytes))][3]+"</span>";}
+function adjustFontSize(){let emojiStringLength=visibleLength(graphicHTML.firstChild.innerText);graphicHTML.style.fontSize=Math.max(Math.round((5-0.65*Math.log(emojiStringLength))*10)/10,0.1)+"rem";}
+function animateGraphic(){document.querySelectorAll(".graphic__symbol").forEach((el)=>{el.classList.add("--loading");})
+setTimeout(()=>{document.querySelectorAll(".graphic__symbol").forEach((el)=>{el.classList.remove("--loading");})},200)}
+const lerp=(x,y,a)=>x*(1-a)+y*a;const clamp=(a,min=0,max=1)=>Math.min(max,Math.max(min,a));const invlerp=(x,y,a)=>clamp((a-x)/(y-x));const range=(x1,y1,x2,y2,a)=>lerp(x2,y2,invlerp(x1,y1,a));function handleScroll(){if(scrollAmount<0)scrollAmount=0;if(27000<=scrollAmount){scrollAmount=27000;document.getElementById("data").innerText=6.5;document.getElementById("unit").innerText="KB";document.getElementById("bits").innerText="~52000 bits";graphicHTML.innerHTML="<span class='graphic__symbol --1'>🖥️</span>";graphicTooltip.innerHTML="this website = <span>ONLY 6.5 KB</span>";animateGraphic();adjustFontSize();return}
+bytes=scrollToBytes(scrollAmount);updateText();displayGraphic();animateGraphic();adjustFontSize();}
+window.addEventListener("wheel",(e)=>{scrollAmount+=e.deltaY;handleScroll();});var touchstartY=0;var touchendY=0;window.addEventListener('touchstart',function(e){touchstartY,touchendY=e.touches[0].screenY;})
+window.addEventListener('touchmove',function(e){touchstartY=e.touches[0].screenY;let deltaY=touchendY-touchstartY;scrollAmount+=deltaY*2;handleScroll();touchendY=touchstartY;})
+addEventListener("mousemove",(e)=>{graphicTooltip.style.top=e.clientY+"px";graphicTooltip.style.left=e.clientX+"px";if(graphicHTML.matches(':hover')){graphicTooltip.classList.remove("--hidden");}else{graphicTooltip.classList.add("--hidden");}});</script>
+</body>
+</html>
