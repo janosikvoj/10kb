@@ -76,76 +76,74 @@ const AddAuthorButton = () => {
   }, [state, form]);
 
   return (
-    <>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="ghost" className="w-full justify-start font-normal">
-            <Plus
-              size={16}
-              strokeWidth={2}
-              className="-ms-2 me-2 opacity-60"
-              aria-hidden="true"
+    <Dialog modal={false}>
+      <DialogTrigger asChild>
+        <Button variant="ghost" className="w-full justify-start font-normal">
+          <Plus
+            size={16}
+            strokeWidth={2}
+            className="-ms-2 me-2 opacity-60"
+            aria-hidden="true"
+          />
+          New author
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>New author</DialogTitle>
+          <DialogDescription>
+            The created author will be saved in the database and become
+            available to select.
+          </DialogDescription>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="fname"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>First name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Honza" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            New author
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>New author</DialogTitle>
-            <DialogDescription>
-              The created author will be saved in the database and become
-              available to select.
-            </DialogDescription>
-          </DialogHeader>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="fname"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>First name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Honza" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="sname"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Surname</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Novák" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </form>
-          </Form>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button type="button" variant="ghost">
-                Close
-              </Button>
-            </DialogClose>
-            <Button
-              onClick={async () => {
-                await form.trigger();
-                if (form.formState.isValid) onSubmit(form.getValues());
-              }}
-              type="submit"
-            >
-              {isPending ? 'Loading…' : 'Submit'}
+            <FormField
+              control={form.control}
+              name="sname"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Surname</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Novák" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </form>
+        </Form>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button" variant="ghost">
+              Close
             </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </>
+          </DialogClose>
+          <Button
+            onClick={async () => {
+              await form.trigger();
+              if (form.formState.isValid) onSubmit(form.getValues());
+            }}
+            type="submit"
+          >
+            {isPending ? 'Loading…' : 'Submit'}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 
