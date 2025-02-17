@@ -22,7 +22,7 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/form';
-import { addAuthorSchema, AddAuthorSchema } from '@/lib/validation/addAuthor';
+import { addAuthorSchema, AddAuthorSchema } from '@/lib/validation/project';
 import { ActionState } from '@/types/ActionState';
 import { createAuthor } from '@/actions/createAuthor';
 import { toast } from '@/hooks/use-toast';
@@ -51,6 +51,7 @@ const AddAuthorButton = () => {
   );
 
   useEffect(() => {
+    console.log('AddAuthor: ' + state?.message);
     if (!state) {
       return;
     }

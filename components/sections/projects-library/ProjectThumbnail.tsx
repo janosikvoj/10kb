@@ -18,7 +18,7 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
   return (
     <div className="relative group hover:bg-black-lighter">
       <a
-        href={`/websites/${project.path}/index.html`}
+        href={`/project${project.path}/index.html`}
         target="_blank"
         className={cn(
           'absolute group/new-tab top-0 right-0 m-2 z-20 size-8',
@@ -30,7 +30,7 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
           {'->'}
         </div>
       </a>
-      <Link href={`/years/${project.path}`}>
+      <Link href={`/years${project.path}`}>
         {displayWebsite && (
           <div className="aspect-video flex justify-center items-center">
             <div className="relative aspect-video w-full">

@@ -15,10 +15,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import {
-  AddProjectSchema,
-  addProjectSchema,
-} from '@/lib/validation/addProject';
+import { AddProjectSchema, addProjectSchema } from '@/lib/validation/project';
 import { Author } from '@prisma/client';
 import { useActionState, useEffect, useTransition } from 'react';
 import { ActionState } from '@/types/ActionState';
@@ -82,8 +79,8 @@ export default function AddProjectForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="md:grid grid-cols-2 gap-16 mb-16">
-          <div className="flex flex-col gap-8">
+        <div className="md:grid grid-cols-2 gap-16 mb-8">
+          <div className="flex flex-col gap-4">
             <FormField
               control={form.control}
               name="title"
@@ -93,9 +90,7 @@ export default function AddProjectForm({
                   <FormControl>
                     <Input placeholder="10kb web" {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This is the name of the website.
-                  </FormDescription>
+                  <FormDescription>Name of the website.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -133,7 +128,7 @@ export default function AddProjectForm({
               )}
             />
           </div>
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-4 mt-4 md:mt-0">
             <FormField
               control={form.control}
               name="description"
@@ -147,7 +142,7 @@ export default function AddProjectForm({
                     />
                   </FormControl>
                   <FormDescription>
-                    This text will be visible on a detail page.
+                    This text will be visible on the detail page.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

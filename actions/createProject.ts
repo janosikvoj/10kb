@@ -5,10 +5,7 @@ import path from 'path';
 import fs from 'fs';
 import extract from 'extract-zip';
 import prisma from '@/lib/prisma';
-import {
-  AddProjectSchema,
-  addProjectSchema,
-} from '@/lib/validation/addProject';
+import { AddProjectSchema, addProjectSchema } from '@/lib/validation/project';
 import { slugify } from '@/lib/utils';
 import { ActionState } from '@/types/ActionState';
 import { cookies } from 'next/headers';
@@ -16,7 +13,7 @@ import * as jose from 'jose';
 
 const DEV_MODE = false;
 
-const WEBSITES_DIR = path.resolve(process.cwd(), 'public', 'websites');
+const WEBSITES_DIR = path.resolve(process.cwd(), 'projects');
 
 export async function createProject(
   state: ActionState,

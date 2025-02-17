@@ -2,14 +2,14 @@
 
 import { revalidatePath } from 'next/cache';
 import prisma from '@/lib/prisma';
-import { AddAuthorSchema, addAuthorSchema } from '@/lib/validation/project';
+import { DeleteAuthorSchema } from '@/components/form/DeleteAuthorButton';
 import { ActionState } from '@/types/ActionState';
 import { cookies } from 'next/headers';
 import * as jose from 'jose';
 
-export async function createAuthor(
+export async function deleteAuthor(
   state: ActionState,
-  inputData: AddAuthorSchema
+  inputData: DeleteAuthorSchema
 ): Promise<ActionState> {
   //———————————————————————————
   // JWT Authentication Check
@@ -56,40 +56,26 @@ export async function createAuthor(
   }
 
   //———————————————————————————
-  // PARSE FORM DATA
+  // DELETE AUTHOR FROM DATABASE
   //———————————————————————————
+  try {
+    await prisma.author.delete({
+      where: {
+        id: inputData.id,
+      },
+    });
 
-  const parse = await addAuthorSchema.safeParseAsync(inputData);
+    revalidatePath('/');
 
-  if (!parse.success) {
+    return {
+      status: 'success',
+      message: 'Author deleted successfully',
+    };
+  } catch (error: unknown) {
+    console.error('Failed to delete author:', error);
     return {
       status: 'error',
-      message: 'Failed to parse form data:' + parse.error,
-
-      errors: parse.error.issues.map((issue) => ({
-        path: issue.path.join('.'),
-        message: `Server validation: ${issue.message}`,
-      })),
+      message: 'Failed to delete author. Please try again.',
     };
   }
-
-  const data = parse.data;
-
-  //———————————————————————————
-  // ADD A RECORD TO DATABASE
-  //———————————————————————————
-
-  await prisma.author.create({
-    data: {
-      fname: data.fname,
-      sname: data.sname,
-    },
-  });
-
-  revalidatePath('/');
-
-  return {
-    status: 'success',
-    message: `New author ${data.fname} ${data.sname} added`,
-  };
 }

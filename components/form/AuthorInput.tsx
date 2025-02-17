@@ -115,6 +115,7 @@ const AuthorInput: React.FC<SelectSearchAddProps> = ({
             <CommandGroup heading="Existing authors">
               {authors.map((author) => (
                 <CommandItem
+                  className="cursor-pointer"
                   key={author.id}
                   value={String(author.id)}
                   onSelect={(currentValue) => {

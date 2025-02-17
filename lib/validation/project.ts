@@ -1,5 +1,12 @@
 import { z } from 'zod';
 
+export const addAuthorSchema = z.object({
+  fname: z.string().min(2, 'Input at least 2 characters'),
+  sname: z.string().min(2, 'Input at least 2 characters'),
+});
+
+export type AddAuthorSchema = z.infer<typeof addAuthorSchema>;
+
 // Define the file size limit and accepted file types as constants
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_FILE_TYPES = ['application/zip', 'application/x-zip-compressed'];

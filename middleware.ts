@@ -4,12 +4,12 @@ import * as jose from 'jose';
 
 export async function middleware(request: NextRequest) {
   const loginUrl = new URL('/login', request.url);
-  console.log('Middleware checking for JWT cookie (jose)...');
+  // console.log('Middleware checking for JWT cookie (jose)...');
 
   const adminSessionToken = request.cookies.get('adminSession')?.value;
 
   if (!adminSessionToken) {
-    console.log('No adminSession cookie found.');
+    // console.log('No adminSession cookie found.');
     return NextResponse.redirect(loginUrl);
   }
 
@@ -34,7 +34,7 @@ export async function middleware(request: NextRequest) {
       throw new Error('Not an admin');
     }
 
-    console.log('JWT verification successful (jose). User authenticated.');
+    // console.log('JWT verification successful (jose). User authenticated.');
     return NextResponse.next();
   } catch (error) {
     console.error('JWT verification failed (jose):', error);

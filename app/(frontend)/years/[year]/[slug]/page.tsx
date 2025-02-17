@@ -92,7 +92,7 @@ export default async function ProjectPage({
                 )}
               </ul>
               <a
-                href={`/websites/${project.path}/index.html`}
+                href={`/project${project.path}/index.html`}
                 target="_blank"
                 className={cn(
                   'hidden',
@@ -114,7 +114,7 @@ export default async function ProjectPage({
               </div>
 
               <a
-                href={`/websites/${project.path}/index.html`}
+                href={`/project${project.path}/index.html`}
                 target="_blank"
                 className={cn(
                   'group/new-tab relative mt-4',

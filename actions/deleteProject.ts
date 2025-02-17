@@ -2,14 +2,15 @@
 
 import { revalidatePath } from 'next/cache';
 import prisma from '@/lib/prisma';
-import { AddAuthorSchema, addAuthorSchema } from '@/lib/validation/project';
 import { ActionState } from '@/types/ActionState';
 import { cookies } from 'next/headers';
 import * as jose from 'jose';
+import * as fs from 'fs/promises';
+import { DeleteProjectSchema } from '@/components/form/DeleteProjectButton';
 
-export async function createAuthor(
+export async function deleteProject(
   state: ActionState,
-  inputData: AddAuthorSchema
+  inputData: DeleteProjectSchema
 ): Promise<ActionState> {
   //———————————————————————————
   // JWT Authentication Check
@@ -56,40 +57,44 @@ export async function createAuthor(
   }
 
   //———————————————————————————
-  // PARSE FORM DATA
+  // DELETE PROJECT FILES & DATABASE RECORD
   //———————————————————————————
 
-  const parse = await addAuthorSchema.safeParseAsync(inputData);
+  try {
+    const project = await prisma.project.findUnique({
+      where: {
+        id: inputData.id,
+      },
+      select: {
+        path: true,
+      },
+    });
 
-  if (!parse.success) {
+    if (!project) {
+      return {
+        status: 'error',
+        message: 'Project not found.',
+      };
+    }
+    const projectDir = `projects/${project.path}`;
+
+    await fs.rm(projectDir, { recursive: true, force: true });
+
+    await prisma.project.delete({
+      where: {
+        id: inputData.id,
+      },
+    });
+    revalidatePath('/');
+    return {
+      status: 'success',
+      message: 'Project and project files deleted successfully',
+    };
+  } catch (error: unknown) {
+    console.error('Failed to delete project and/or files:', error);
     return {
       status: 'error',
-      message: 'Failed to parse form data:' + parse.error,
-
-      errors: parse.error.issues.map((issue) => ({
-        path: issue.path.join('.'),
-        message: `Server validation: ${issue.message}`,
-      })),
+      message: 'Failed to delete project and/or files. Please try again.',
     };
   }
-
-  const data = parse.data;
-
-  //———————————————————————————
-  // ADD A RECORD TO DATABASE
-  //———————————————————————————
-
-  await prisma.author.create({
-    data: {
-      fname: data.fname,
-      sname: data.sname,
-    },
-  });
-
-  revalidatePath('/');
-
-  return {
-    status: 'success',
-    message: `New author ${data.fname} ${data.sname} added`,
-  };
 }

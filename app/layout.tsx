@@ -8,6 +8,7 @@ import About from '@/components/sections/About';
 import Projects from '@/components/sections/Projects';
 import ScrollToTopButton from '@/components/navigation/ScrollToTopButton';
 import { Suspense } from 'react';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: '10kB Websites',
@@ -43,6 +44,7 @@ export default function RootLayout({
           </LandingPageNav>
           <Footer />
         </Suspense>
+        <Toaster />
       </body>
     </html>
   );

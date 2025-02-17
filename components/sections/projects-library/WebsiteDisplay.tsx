@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 const srcExists = (src: string) => {
-  return fs.existsSync(path.join(process.cwd(), '/public/websites', src));
+  return fs.existsSync(path.join(process.cwd(), '/projects', src));
 };
 
 interface WebsiteDisplayProps {
@@ -34,7 +34,7 @@ const WebsiteDisplay: React.FC<WebsiteDisplayProps> = ({
             width: `${100 * zoom}%`,
             height: `${100 * zoom}%`,
           }}
-          src={`/websites/${path}/index.html`}
+          src={`/project/${path}/index.html`}
           loading="lazy"
           allowFullScreen={false}
           sandbox={
