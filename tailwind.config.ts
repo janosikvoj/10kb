@@ -3,11 +3,7 @@ import containerQueries from '@tailwindcss/container-queries';
 import tailwindAnimate from 'tailwindcss-animate';
 
 const config: Config = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/**/*'],
   theme: {
     fontFamily: {
       sans: ['var(--font-fira-code)'],
