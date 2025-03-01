@@ -37,7 +37,8 @@ export default async function YearPage({
         </ResponsiveContainer>
       </main>
     );
-  } catch {
+  } catch (e: unknown) {
+    console.log('An error occurred: ' + e);
     notFound();
   }
 }

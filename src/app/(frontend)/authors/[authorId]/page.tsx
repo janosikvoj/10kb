@@ -49,7 +49,8 @@ export default async function AuthorPage({
         </ResponsiveContainer>
       </main>
     );
-  } catch {
+  } catch (e: unknown) {
+    console.log('An error occurred: ' + e);
     notFound();
   }
 }
