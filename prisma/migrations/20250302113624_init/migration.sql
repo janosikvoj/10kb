@@ -12,9 +12,12 @@ CREATE TABLE `Project` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
     `year` INTEGER NOT NULL DEFAULT 2020,
-    `description` VARCHAR(191) NOT NULL,
+    `description` TEXT NOT NULL,
     `authorId` INTEGER NULL,
+    `path` VARCHAR(191) NOT NULL,
+    `localByteSize` INTEGER NULL,
 
+    UNIQUE INDEX `Project_path_key`(`path`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

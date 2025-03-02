@@ -4,6 +4,7 @@ WORKDIR /app
 # Install dependencies
 FROM base AS deps
 COPY package.json package-lock.json ./
+COPY prisma ./prisma/
 RUN npm ci
 
 # Build stage
@@ -24,6 +25,7 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/prisma ./prisma/
 
 # Automatically leverage output traces to reduce image size
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
@@ -36,4 +38,4 @@ ENV PORT=3000
 
 VOLUME [ "/app/projects" ]
 
-CMD ["node", "server.js"]
+CMD ["sh", "-c", "npx prisma db push --accept-data-loss --skip-generate && npx prisma migrate deploy --schema=./prisma/schema.prisma && node server.js"]

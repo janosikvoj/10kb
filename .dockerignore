@@ -2,7 +2,11 @@ node_modules
 .next
 out
 .env
-Dockerfile
+Dockerfile*
 .dockerignore
-npm-debug.log
+docker-compose*
+*.log
 README.md
+
+.git
+.gitignore
