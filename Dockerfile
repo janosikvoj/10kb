@@ -38,4 +38,4 @@ ENV PORT=3000
 
 VOLUME [ "/app/projects" ]
 
-CMD ["sh", "-c", "npx prisma db push --accept-data-loss --skip-generate && npx prisma migrate deploy --schema=./prisma/schema.prisma && node server.js"]
+CMD ["sh", "-c", "sleep 3 && npx prisma migrate deploy --schema=./prisma/schema.prisma && node server.js"]
