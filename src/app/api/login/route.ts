@@ -14,6 +14,8 @@ export async function POST(request: Request) {
     );
   }
 
+  console.log(process.env.ADMIN_USERNAME, process.env.ADMIN_PASSWORD);
+
   if (
     username === process.env.ADMIN_USERNAME &&
     password === process.env.ADMIN_PASSWORD

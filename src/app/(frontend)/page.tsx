@@ -3,7 +3,7 @@ import Hero from '@/components/sections/Hero';
 import ProjectsLibrary from '@/components/sections/projects-library/ProjectsLibrary';
 import { ProjectWithAuthor } from '@/components/sections/projects-library/types';
 import { sortByYear } from '@/components/sections/projects-library/utils';
-import prisma from '@/lib/prisma';
+import { supabase } from '@/utils/supabase/initSupabase';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
@@ -19,15 +19,20 @@ function filterLastThreeYears(data: { [year: number]: ProjectWithAuthor[] }): {
 }
 
 export default async function LandingPage() {
-  let projects: ProjectWithAuthor[] = [];
-  try {
-    projects = await prisma.project.findMany({
-      include: { Author: true },
-    });
-  } catch (e: unknown) {
-    console.log('An error occurred: ' + e);
+  const { data, error } = await supabase.from('project').select(
+    `
+        *,
+        author (*)
+      `
+  );
+  if (error) {
+    console.error('An error occurred: ', error);
   }
-  const projectsByYear = filterLastThreeYears(sortByYear(projects));
+  if (data == null || data.length <= 0) {
+    console.error('No projects');
+  }
+
+  const projectsByYear = filterLastThreeYears(sortByYear(data ?? []));
 
   return (
     <main className="w-full">

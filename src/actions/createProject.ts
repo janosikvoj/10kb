@@ -4,12 +4,12 @@ import { revalidatePath } from 'next/cache';
 import path from 'path';
 import fs from 'fs';
 import extract from 'extract-zip';
-import prisma from '@/lib/prisma';
 import { AddProjectSchema, addProjectSchema } from '@/lib/validation/project';
 import { slugify } from '@/lib/utils';
 import { ActionState } from '@/types/ActionState';
 import { cookies } from 'next/headers';
 import * as jose from 'jose';
+import { supabase } from '@/utils/supabase/initSupabase';
 
 const DEV_MODE = false;
 
@@ -277,16 +277,18 @@ export async function createProject(
   //———————————————————————————
 
   try {
-    await prisma.project.create({
-      data: {
-        title: data.title,
-        year: data.year,
-        description: data.description,
-        path: `/${data.year}/${slug}`,
-        authorId: Number(data.author),
-        localByteSize: websiteSizeInBytes,
-      },
+    const { error } = await supabase.from('project').insert({
+      title: data.title,
+      year: data.year,
+      description: data.description,
+      path: `/${data.year}/${slug}`,
+      author: Number(data.author),
+      localByteSize: websiteSizeInBytes,
     });
+
+    if (error) {
+      throw error;
+    }
 
     revalidatePath('/');
 

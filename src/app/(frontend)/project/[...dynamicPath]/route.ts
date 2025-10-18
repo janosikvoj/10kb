@@ -26,7 +26,7 @@ export async function GET(
         return new NextResponse('Unsupported file type', { status: 400 });
       }
 
-      return new NextResponse(fileBuffer, {
+      return new NextResponse(new Uint8Array(fileBuffer), {
         headers: {
           'Content-Type': mimeType,
         },

@@ -1,6 +1,6 @@
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import ProjectsGroup from '@/components/sections/projects-library/ProjectsGroup';
-import prisma from '@/lib/prisma';
+import { supabase } from '@/utils/supabase/initSupabase';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -16,10 +16,24 @@ export default async function YearPage({
 }) {
   try {
     const { year } = await params;
-    const projects = await prisma.project.findMany({
-      where: { year: Number(year) },
-      include: { Author: true },
-    });
+
+    const { data, error } = await supabase
+      .from('project')
+      .select(
+        `
+      *,
+      author (*)
+    `
+      )
+      .eq('year', Number(year));
+    if (error) {
+      console.error('An error occurred: ', error);
+    }
+    if (data == null || data.length <= 0) {
+      console.error('No projects');
+    }
+    const projects = data;
+
     return (
       <main className="w-full pt-64 sm:pt-48">
         <ResponsiveContainer>
@@ -33,7 +47,7 @@ export default async function YearPage({
             <span className="z-10">Projects from </span>
             <span className="bg-success px-2 text-black">{year}</span>
           </h1>
-          <ProjectsGroup projects={projects} />
+          <ProjectsGroup projects={projects ?? []} />
         </ResponsiveContainer>
       </main>
     );

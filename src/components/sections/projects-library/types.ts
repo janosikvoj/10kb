@@ -1,13 +1,20 @@
-import { Project, Author } from '@prisma/client';
+import { Database } from '@/utils/supabase/supabase';
 
-export type ProjectWithAuthor = {
-  Author: Author | null;
-} & Project;
+// Extract table types from Supabase generated types
+export type Project = Database['public']['Tables']['project']['Row'];
+export type Author = Database['public']['Tables']['author']['Row'];
 
-export type AuthorWithProjects = {
-  projects: Project[];
-} & Author;
+// ProjectWithAuthor - a project with its author
+export type ProjectWithAuthor = Project & {
+  author: Author | null;
+};
 
-export type AuthorWithProjectsWithAuthor = {
-  projects: ProjectWithAuthor[];
-} & Author;
+// AuthorWithProjects - an author with their projects
+export type AuthorWithProjects = Author & {
+  project: Project[];
+};
+
+// AuthorWithProjectsWithAuthor - an author with projects that include author data
+export type AuthorWithProjectsWithAuthor = Author & {
+  project: ProjectWithAuthor[];
+};

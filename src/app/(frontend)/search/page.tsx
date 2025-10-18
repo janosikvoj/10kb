@@ -1,10 +1,11 @@
 import LoadingEllipsis from '@/components/common/LoadingEllipsis';
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import ProjectsGroup from '@/components/sections/projects-library/ProjectsGroup';
-import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Metadata } from 'next';
+import { supabase } from '@/utils/supabase/initSupabase';
+import { ProjectWithAuthor } from '@/components/sections/projects-library/types';
 
 const MIN_QUERY_LENGTH: number = 2;
 
@@ -16,20 +17,66 @@ async function fetchQueriedData(query: string) {
   if (!query || query.length < MIN_QUERY_LENGTH)
     return { projects: [], authors: [] };
 
-  const projects = await prisma.project.findMany({
-    where: { title: { contains: query } },
-    include: { Author: true },
-  });
+  // Search projects by title
+  const { data: projects, error: projectsError } = await supabase
+    .from('project')
+    .select(
+      `
+      *,
+      author (*)
+    `
+    )
+    .ilike('title', `%${query}%`);
 
-  const authors = await prisma.author.findMany({
-    where: {
-      OR: [{ fname: { contains: query } }, { sname: { contains: query } }],
-    },
-    include: { projects: true, _count: { select: { projects: true } } },
-  });
+  if (projectsError) {
+    console.error('Error fetching projects:', projectsError);
+  }
 
-  return { projects, authors };
+  // Search authors by first or last name
+  const { data: authors, error: authorsError } = await supabase
+    .from('author')
+    .select(
+      `
+      *,
+      project (*)
+    `
+    )
+    .or(`fname.ilike.%${query}%,sname.ilike.%${query}%`);
+
+  if (authorsError) {
+    console.error('Error fetching authors:', authorsError);
+  }
+
+  // Transform authors to include project count
+  const authorsWithCount = authors?.map((author) => ({
+    ...author,
+    projectCount: author.project?.length || 0,
+  }));
+
+  return {
+    projects: (projects || []) as ProjectWithAuthor[],
+    authors: authorsWithCount || [],
+  };
 }
+
+// async function fetchQueriedData(query: string) {
+//   if (!query || query.length < MIN_QUERY_LENGTH)
+//     return { projects: [], authors: [] };
+
+//   const projects = await prisma.project.findMany({
+//     where: { title: { contains: query } },
+//     include: { Author: true },
+//   });
+
+//   const authors = await prisma.author.findMany({
+//     where: {
+//       OR: [{ fname: { contains: query } }, { sname: { contains: query } }],
+//     },
+//     include: { projects: true, _count: { select: { projects: true } } },
+//   });
+
+//   return { projects, authors };
+// }
 
 export default async function SearchPage({
   searchParams,
@@ -86,7 +133,7 @@ export default async function SearchPage({
                     >
                       {author.fname} {author.sname}
                       <span className="text-xs align-top text-info ml-px font-semibold">
-                        {author._count.projects}
+                        {author.projectCount}
                       </span>
                     </Link>
                   ))}

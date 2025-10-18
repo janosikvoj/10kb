@@ -22,7 +22,7 @@ const firaCode = Fira_Code({
   variable: '--font-fira-code',
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

@@ -1,11 +1,11 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import prisma from '@/lib/prisma';
 import { AddAuthorSchema, addAuthorSchema } from '@/lib/validation/project';
 import { ActionState } from '@/types/ActionState';
 import { cookies } from 'next/headers';
 import * as jose from 'jose';
+import { supabase } from '@/utils/supabase/initSupabase';
 
 export async function createAuthor(
   state: ActionState,
@@ -79,12 +79,18 @@ export async function createAuthor(
   // ADD A RECORD TO DATABASE
   //———————————————————————————
 
-  await prisma.author.create({
-    data: {
-      fname: data.fname,
-      sname: data.sname,
-    },
+  const { error } = await supabase.from('author').insert({
+    fname: data.fname,
+    sname: data.sname,
   });
+
+  if (error) {
+    console.error('Error creating author:', error);
+    return {
+      status: 'error',
+      message: 'Failed to create author. Please try again.',
+    };
+  }
 
   revalidatePath('/');
 

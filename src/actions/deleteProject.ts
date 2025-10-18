@@ -1,11 +1,11 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import prisma from '@/lib/prisma';
 import { ActionState } from '@/types/ActionState';
 import { cookies } from 'next/headers';
 import * as jose from 'jose';
 import * as fs from 'fs/promises';
+import { supabase } from '@/utils/supabase/initSupabase';
 
 export async function deleteProject(inputData: {
   id: number;
@@ -59,31 +59,37 @@ export async function deleteProject(inputData: {
   //———————————————————————————
 
   try {
-    const project = await prisma.project.findUnique({
-      where: {
-        id: inputData.id,
-      },
-      select: {
-        path: true,
-      },
-    });
+    // Fetch the project to get the path
+    const { data: project, error: fetchError } = await supabase
+      .from('project')
+      .select('path')
+      .eq('id', inputData.id)
+      .single();
 
-    if (!project) {
+    if (fetchError || !project) {
       return {
         status: 'error',
         message: 'Project not found.',
       };
     }
+
     const projectDir = `projects/${project.path}`;
 
+    // Delete the project files from filesystem
     await fs.rm(projectDir, { recursive: true, force: true });
 
-    await prisma.project.delete({
-      where: {
-        id: inputData.id,
-      },
-    });
+    // Delete the project from database
+    const { error: deleteError } = await supabase
+      .from('project')
+      .delete()
+      .eq('id', inputData.id);
+
+    if (deleteError) {
+      throw deleteError;
+    }
+
     revalidatePath('/');
+
     return {
       status: 'success',
       message: 'Project and project files deleted successfully',

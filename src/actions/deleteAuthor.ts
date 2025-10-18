@@ -1,10 +1,10 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import prisma from '@/lib/prisma';
 import { ActionState } from '@/types/ActionState';
 import { cookies } from 'next/headers';
 import * as jose from 'jose';
+import { supabase } from '@/utils/supabase/initSupabase';
 
 export async function deleteAuthor(inputData: {
   id: number;
@@ -57,11 +57,14 @@ export async function deleteAuthor(inputData: {
   // DELETE AUTHOR FROM DATABASE
   //———————————————————————————
   try {
-    await prisma.author.delete({
-      where: {
-        id: inputData.id,
-      },
-    });
+    const { error } = await supabase
+      .from('author')
+      .delete()
+      .eq('id', inputData.id);
+
+    if (error) {
+      throw error;
+    }
 
     revalidatePath('/');
 

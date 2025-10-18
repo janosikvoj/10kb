@@ -34,7 +34,9 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
         {displayWebsite && (
           <div className="aspect-video flex justify-center items-center">
             <div className="relative aspect-video w-full">
-              <WebsiteDisplay path={project.path} zoom={zoom || 3.5} />
+              {project.path && (
+                <WebsiteDisplay path={project.path} zoom={zoom || 3.5} />
+              )}
             </div>
           </div>
         )}
@@ -54,8 +56,8 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
                 !displayWebsite && 'text-neutral-lighter'
               )}
             >
-              {project.Author && (
-                <p>{project.Author.fname + ' ' + project.Author.sname}</p>
+              {project.author && (
+                <p>{project.author.fname + ' ' + project.author.sname}</p>
               )}
               {!displayWebsite && <p>{project.year ?? 'XXXX'}</p>}
             </div>

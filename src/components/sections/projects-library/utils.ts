@@ -8,6 +8,7 @@ export function sortByYear(projects: ProjectWithAuthor[]): {
   // Group projects by year
   projects.forEach((project) => {
     const year = project.year;
+    if (year == null) return;
     if (!sortedProjects[year]) {
       sortedProjects[year] = [];
     }

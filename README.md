@@ -1,28 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 10kB Project Gallery
 
-## Getting Started
+A Next.js-based web platform for showcasing student web projects created within a 10KB size constraint. The application features project browsing by year and author, full-text search, and an admin dashboard for content management.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Framework: Next.js 15 (App Router)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Database: Supabase (PostgreSQL)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Authentication: JWT with jose
 
-## Learn More
+Styling: Tailwind CSS
 
-To learn more about Next.js, take a look at the following resources:
+UI Components: shadcn/ui
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Forms: React Hook Form + Zod validation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Language: TypeScript
+
+## Features
+
+Project Library: Browse projects organized by year or author
+
+Search: Full-text search across project titles and author names
+
+Project Details: View individual projects with author information
+
+Admin Dashboard:
+
+JWT-based authentication
+
+Upload projects as ZIP files (automatically extracts and validates)
+
+Add/delete projects and authors
+
+Automatic file size calculation
+
+Responsive Design: Mobile-friendly interface

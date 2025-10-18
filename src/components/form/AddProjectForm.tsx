@@ -16,12 +16,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { AddProjectSchema, addProjectSchema } from '@/lib/validation/project';
-import { Author } from '@prisma/client';
 import { useActionState, useEffect, useTransition } from 'react';
 import { ActionState } from '@/types/ActionState';
 import { createProject } from '@/actions/createProject';
 import AuthorInput from './AuthorInput';
 import { toast } from '@/hooks/use-toast';
+import { Author } from '../sections/projects-library/types';
 
 export default function AddProjectForm({
   data,

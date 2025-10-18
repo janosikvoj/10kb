@@ -1,6 +1,5 @@
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import AddProjectForm from '@/components/form/AddProjectForm';
-import prisma from '@/lib/prisma';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -8,6 +7,7 @@ import LogoutButton from '@/components/buttons/LogoutButton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AuthorsDataTable from '@/components/tables/AuthorsTable';
 import ProjectsDataTable from '@/components/tables/ProjectsTable';
+import { supabase } from '@/utils/supabase/initSupabase';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,12 +17,14 @@ export const metadata: Metadata = {
 
 export default async function Admin() {
   try {
-    const authors = await prisma.author.findMany();
-    const projects = await prisma.project.findMany({
-      include: {
-        Author: true,
-      },
-    });
+    const { data: projects } = await supabase.from('project').select(
+      `
+          *,
+          author (*)
+        `
+    );
+
+    const { data: authors } = await supabase.from('author').select();
 
     return (
       <main className="w-full pt-64 sm:pt-48">
@@ -50,7 +52,7 @@ export default async function Admin() {
                   re-add it again.
                 </p>
               </hgroup>
-              <AddProjectForm data={{ authors: authors }} />
+              <AddProjectForm data={{ authors: authors ?? [] }} />
             </ResponsiveContainer>
             <ResponsiveContainer>
               <hgroup className="mb-8">
@@ -68,21 +70,21 @@ export default async function Admin() {
                   <TabsTrigger value="projects">
                     Projects
                     <span className="text-xs align-top -mt-1 ml-px font-semibold">
-                      {projects.length}
+                      {projects?.length ?? 0}
                     </span>
                   </TabsTrigger>
                   <TabsTrigger value="authors">
                     Authors
                     <span className="text-xs align-top -mt-1 ml-px font-semibold">
-                      {authors.length}
+                      {authors?.length ?? 0}
                     </span>
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="projects">
-                  <ProjectsDataTable projects={projects} />
+                  <ProjectsDataTable projects={projects ?? []} />
                 </TabsContent>
                 <TabsContent className="mt-4" value="authors">
-                  <AuthorsDataTable authors={authors} />
+                  <AuthorsDataTable authors={authors ?? []} />
                 </TabsContent>
               </Tabs>
             </ResponsiveContainer>

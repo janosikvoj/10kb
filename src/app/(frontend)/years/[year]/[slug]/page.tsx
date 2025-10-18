@@ -1,12 +1,12 @@
 import CornerStrokeEffect from '@/components/common/CornerStrokeEffect';
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import WebsiteDisplay from '@/components/sections/projects-library/WebsiteDisplay';
-import prisma from '@/lib/prisma';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { supabase } from '@/utils/supabase/initSupabase';
 
 export const metadata: Metadata = {
   title: '10kB Project',
@@ -22,12 +22,25 @@ export default async function ProjectPage({
     notFound();
   }
   const { year, slug } = await params;
-  const project = await prisma.project.findUnique({
-    where: { path: `/${year}/${slug}` },
-    include: {
-      Author: { include: { _count: { select: { projects: true } } } },
-    },
-  });
+
+  const { data, error } = await supabase
+    .from('project')
+    .select(
+      `
+        *,
+        author (*)
+      `
+    )
+    .eq('path', `/${year}/${slug}`)
+    .limit(1)
+    .single();
+  if (error) {
+    console.error('An error occurred: ', error);
+  }
+  if (data == null) {
+    console.error('No projects');
+  }
+  const project = data;
 
   if (project) {
     return (
@@ -54,14 +67,14 @@ export default async function ProjectPage({
               </hgroup>
 
               <ul className="space-y-2 mt-8 border-l pl-3">
-                {project.Author && (
+                {project.author && (
                   <li>
                     <h2 className="text-white-darker text-sm">Author</h2>
                     <Link
-                      href={`/authors/${project.Author.id}`}
+                      href={`/authors/${project.author.id}`}
                       className="group hover:border-b -mr-0.5"
                     >
-                      {project.Author.fname} {project.Author.sname}
+                      {project.author.fname} {project.author.sname}
                       <span className=" text-info group-hover:text-white">
                         {'->'}
                       </span>
@@ -110,7 +123,11 @@ export default async function ProjectPage({
             </div>
             <div className="col-span-2 mt-8 sm:mt-0">
               <div className="relative aspect-video">
-                <WebsiteDisplay path={project.path} zoom={2} isInteractable />
+                <WebsiteDisplay
+                  path={project.path ?? ''}
+                  zoom={2}
+                  isInteractable
+                />
               </div>
 
               <a

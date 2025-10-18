@@ -1,6 +1,6 @@
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import ProjectsGroup from '@/components/sections/projects-library/ProjectsGroup';
-import prisma from '@/lib/prisma';
+import { supabase } from '@/utils/supabase/initSupabase';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -16,19 +16,28 @@ export default async function AuthorPage({
 }) {
   try {
     const { authorId } = await params;
-    if (!Number(authorId)) throw new Error();
-
-    const author = await prisma.author.findUniqueOrThrow({
-      where: { id: Number(authorId) },
-      include: { projects: true },
-    });
-
-    const projects = author.projects.map((project) => {
-      return {
-        ...project,
-        Author: { id: author.id, fname: author.fname, sname: author.sname },
-      };
-    });
+    const { data, error } = await supabase
+      .from('author')
+      .select(
+        `
+            *,
+            project (
+              *,
+              author (*)
+            )
+          `
+      )
+      .eq('id', Number(authorId))
+      .limit(1)
+      .single();
+    if (error) {
+      console.error('An error occurred: ', error);
+    }
+    if (!data) {
+      console.error('No projects');
+      notFound();
+    }
+    const author = data;
 
     return (
       <main className="w-full pt-64 sm:pt-48">
@@ -45,7 +54,7 @@ export default async function AuthorPage({
               {author.fname + ' ' + author.sname}
             </span>
           </h1>
-          <ProjectsGroup projects={projects} />
+          <ProjectsGroup projects={author.project} />
         </ResponsiveContainer>
       </main>
     );

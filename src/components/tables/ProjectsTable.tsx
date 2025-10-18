@@ -10,15 +10,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Author, Project } from '@prisma/client';
 import { ChevronLeft, ChevronRight, Search, Slash } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import DeleteProjectButton from '../form/DeleteProjectButton';
+import { Author, Project } from '../sections/projects-library/types';
 
 const ProjectsTable = ({
   projects,
 }: {
-  projects: (Project & { Author: Author | null })[];
+  projects: (Project & { author: Author | null })[];
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
@@ -100,8 +100,8 @@ const ProjectsTable = ({
                 {project.year}
               </TableCell>
               <TableCell className="text-neutral-lighter">
-                {project.Author
-                  ? project.Author.fname + ' ' + project.Author.sname
+                {project.author
+                  ? project.author.fname + ' ' + project.author.sname
                   : 'undefined'}
               </TableCell>
               <TableCell className="text-neutral-lighter">

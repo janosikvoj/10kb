@@ -20,9 +20,9 @@ import {
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { ControllerRenderProps, UseFormReturn } from 'react-hook-form';
-import { Author } from '@prisma/client';
 import { FormControl } from '@/components/ui/form';
 import AddAuthorButton from './AddAuthorButton';
+import { Author } from '../sections/projects-library/types';
 
 interface SelectSearchAddProps {
   field: ControllerRenderProps<

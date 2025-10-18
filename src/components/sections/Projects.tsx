@@ -2,19 +2,23 @@ import React, { Suspense } from 'react';
 import ResponsiveContainer from '@/components/common/ResponsiveContainer';
 import LandingPageNavLink from '../navigation/LandingPageNavLink';
 import { cn, shuffle } from '@/lib/utils';
-import prisma from '@/lib/prisma';
 import Link from 'next/link';
+import { supabase } from '@/utils/supabase/initSupabase';
 
 const MAX_LINK_COUNT = 6;
 
 async function fetchProjects() {
   try {
-    const projects = await prisma.project.findMany({
-      select: {
-        year: true,
-      },
-    });
-    return projects;
+    const { data: projects, error } = await supabase
+      .from('project')
+      .select('year');
+
+    if (error) {
+      console.error('Error fetching projects:', error);
+      return [];
+    }
+
+    return projects || [];
   } catch {
     return [];
   }
@@ -22,10 +26,25 @@ async function fetchProjects() {
 
 async function fetchAuthors() {
   try {
-    const authors = await prisma.author.findMany({
-      include: { _count: { select: { projects: true } } },
-    });
-    return authors;
+    const { data: authors, error } = await supabase.from('author').select(
+      `
+        *,
+        project (id)
+      `
+    );
+
+    if (error) {
+      console.error('Error fetching authors:', error);
+      return [];
+    }
+
+    // Transform to include project count
+    const authorsWithCount = authors?.map((author) => ({
+      ...author,
+      projectCount: author.project?.length || 0,
+    }));
+
+    return authorsWithCount || [];
   } catch {
     return [];
   }
@@ -37,7 +56,9 @@ const Projects = async () => {
 
   const projectsYear: {
     year: number;
-  }[] = await fetchProjects();
+  }[] = (await fetchProjects()).filter(
+    (p): p is { year: number } => p.year !== null
+  );
 
   const years: number[] = projectsYear.map((p) => p.year);
 
@@ -124,7 +145,7 @@ const Projects = async () => {
                   >
                     {author.fname} {author.sname}
                     <span className="text-xs align-top text-info ml-px font-semibold">
-                      {author._count.projects}
+                      {author.projectCount}
                     </span>
                   </Link>
                 );

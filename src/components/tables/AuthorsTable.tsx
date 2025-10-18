@@ -2,7 +2,6 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Author } from '@prisma/client';
 import { ChevronLeft, ChevronRight, Search, Slash } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
@@ -14,6 +13,7 @@ import {
   TableRow,
 } from '../ui/table';
 import DeleteAuthorButtonAPI from '../form/DeleteAuthorButton';
+import { Author } from '../sections/projects-library/types';
 
 const AuthorsTable = ({ authors }: { authors: Author[] }) => {
   const [searchQuery, setSearchQuery] = useState('');
