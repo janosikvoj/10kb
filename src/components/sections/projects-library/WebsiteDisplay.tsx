@@ -16,7 +16,7 @@ interface WebsiteDisplayProps {
   isInteractable?: boolean;
 }
 
-const WebsiteDisplay: React.FC<WebsiteDisplayProps> = ({
+const WebsiteDisplay: React.FC<WebsiteDisplayProps> = async ({
   path,
   zoom,
   isInteractable = false,
@@ -27,7 +27,7 @@ const WebsiteDisplay: React.FC<WebsiteDisplayProps> = ({
         <iframe
           className={cn(
             'z-10 absolute origin-top-left',
-            !isInteractable && 'pointer-events-none'
+            !isInteractable && 'pointer-events-none',
           )}
           style={{
             scale: 1 / zoom,

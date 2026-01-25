@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import * as jose from 'jose';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const loginUrl = new URL('/login', request.url);
   // console.log('Middleware checking for JWT cookie (jose)...');
 
@@ -27,7 +27,7 @@ export async function middleware(request: NextRequest) {
       secret,
       {
         algorithms: ['HS256'],
-      }
+      },
     );
 
     if (!verifiedToken.isAdmin) {
