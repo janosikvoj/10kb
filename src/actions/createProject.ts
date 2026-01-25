@@ -17,7 +17,7 @@ const WEBSITES_DIR = path.resolve(process.cwd(), 'projects');
 
 export async function createProject(
   state: ActionState,
-  inputData: AddProjectSchema
+  inputData: AddProjectSchema,
 ): Promise<ActionState> {
   DEV_MODE && console.log('Server action initiated.');
 
@@ -39,7 +39,7 @@ export async function createProject(
     const jwtSecretKey = process.env.JWT_SECRET_KEY;
     if (!jwtSecretKey) {
       console.error(
-        'JWT_SECRET_KEY is not set in environment variables (Server Action)!'
+        'JWT_SECRET_KEY is not set in environment variables (Server Action)!',
       );
       return { status: 'error', message: 'Server configuration error' };
     }
@@ -51,7 +51,7 @@ export async function createProject(
       secret,
       {
         algorithms: ['HS256'],
-      }
+      },
     );
 
     if (!verifiedToken.isAdmin) {
@@ -282,7 +282,7 @@ export async function createProject(
       year: data.year,
       description: data.description,
       path: `/${data.year}/${slug}`,
-      author: Number(data.author),
+      authorId: Number(data.author),
       localByteSize: websiteSizeInBytes,
     });
 
