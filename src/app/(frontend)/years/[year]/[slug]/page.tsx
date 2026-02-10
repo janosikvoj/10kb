@@ -29,7 +29,7 @@ export default async function ProjectPage({
       `
         *,
         author (*)
-      `
+      `,
     )
     .eq('path', `/${year}/${slug}`)
     .limit(1)
@@ -100,7 +100,7 @@ export default async function ProjectPage({
                     <h2 className="text-white-darker text-sm">
                       Size on server
                     </h2>
-                    {Math.round(project.localByteSize / 10) / 100} Kb
+                    {Math.round(project.localByteSize / 10) / 100} kB
                   </li>
                 )}
               </ul>
@@ -111,7 +111,7 @@ export default async function ProjectPage({
                   'hidden',
                   'group/new-tab relative w-fit mt-12',
                   'sm:flex justify-center items-center',
-                  'text-info hover:text-white'
+                  'text-info hover:text-white',
                 )}
               >
                 <CornerStrokeEffect className="group-hover/new-tab:stroke-white" />
@@ -136,7 +136,7 @@ export default async function ProjectPage({
                 className={cn(
                   'group/new-tab relative mt-4',
                   'sm:hidden flex justify-center items-center',
-                  'text-info hover:text-white'
+                  'text-info hover:text-white',
                 )}
               >
                 <CornerStrokeEffect className="group-hover/new-tab:stroke-white" />

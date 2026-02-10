@@ -23,7 +23,7 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
         className={cn(
           'absolute group/new-tab top-0 right-0 m-2 z-20 size-8',
           'hidden group-hover:flex justify-center items-center',
-          'bg-black text-info hover:text-white'
+          'bg-black text-info hover:text-white',
         )}
       >
         <div className="pl-0.5 group-hover/new-tab:pl-3 -rotate-45 text-nowrap transition-all">
@@ -45,7 +45,7 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
             'text-white flex flex-row justify-between items-baseline',
             'transition-all',
             displayWebsite && 'pt-6 group-hover:p-3',
-            !displayWebsite && 'flex-col px-3 py-2'
+            !displayWebsite && 'flex-col px-3 py-2',
           )}
         >
           <div>
@@ -53,7 +53,7 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
             <div
               className={cn(
                 'text-sm',
-                !displayWebsite && 'text-neutral-lighter'
+                !displayWebsite && 'text-neutral-lighter',
               )}
             >
               {project.author && (
@@ -68,7 +68,7 @@ const ProjectThumbnail: React.FC<ProjectThumbnailProps> = ({
 
               {project.localByteSize && (
                 <p className="text-sm">
-                  {Math.round(project.localByteSize / 10) / 100}Kb
+                  {Math.round(project.localByteSize / 10) / 100} kB
                 </p>
               )}
             </div>

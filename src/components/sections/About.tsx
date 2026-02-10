@@ -29,12 +29,11 @@ const About = () => {
         </hgroup>
         <div className="text-sm text-white-darker leading-relaxed mt-8 space-y-2">
           <p>
-            An innovative challenge for design students to create websites that
-            are limited to a maximum size of 10 kilobytes. This constraint
-            encourages creativity and efficient use of space. Each website
-            design must be optimized to provide an appealing user experience.
-            The project serves as a platform for students to learn and
-            experiment, and inspire future designers.
+            10kB web presents websites with a single parameter: the maximum data
+            size is limited to 10 kilobytes. This limitation stimulates
+            creativity and the effective use of both the oldest and most modern
+            web technologies. Every website design must be data-optimized, while
+            also offering an attractive user experience.
           </p>
           <p>
             Created by students from the Digital Design Studio, Faculty of
